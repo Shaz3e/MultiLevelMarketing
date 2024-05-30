@@ -25,6 +25,12 @@ use App\Http\Controllers\Admin\TodoLabelController;
 // Pin Code
 use App\Http\Controllers\Admin\PinCodeController;
 
+// Ranking
+use App\Http\Controllers\Admin\RankingController;
+
+// Payment Methods
+use App\Http\Controllers\Admin\PaymentMethodController;
+
 // Tasks
 use App\Http\Controllers\Admin\TaskController;
 
@@ -72,7 +78,7 @@ use App\Http\Controllers\Admin\AppSetting\MailSettingController;
 use App\Http\Controllers\Admin\AppSetting\CurrencySettingController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\AppSetting\SmsSettingController;
-use App\Http\Controllers\Admin\RankingController;
+
 // Permission
 use App\Http\Controllers\Admin\RolePermission\PermissionController;
 
@@ -192,6 +198,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
          * Ranking
          */
         Route::resource('rankings', RankingController::class);
+
+        /**
+         * Payment Methods
+         */
+        Route::resource('payment-methods', PaymentMethodController::class);
 
         /**
          * Tasks

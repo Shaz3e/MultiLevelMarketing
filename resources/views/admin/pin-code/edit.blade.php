@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <form action="{{ route('admin.pins.update', $pin) }}" method="POST" class="needs-validation" novalidate>
+                <form action="{{ route('admin.pins.update', $pin->id) }}" method="POST" class="needs-validation" novalidate>
                     @csrf
                     @method('put')
                     <div class="card-body">

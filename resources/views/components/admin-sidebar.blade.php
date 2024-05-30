@@ -50,6 +50,16 @@
                                 </li>
                             @endcan
 
+                            {{-- Ranking --}}
+                            @can('payment-method.list')
+                                <li>
+                                    <a href="{{ route('admin.payment-methods.index') }}" class="waves-effect">
+                                        <i class="ri-wallet-line"></i>
+                                        <span>Payment Method</span>
+                                    </a>
+                                </li>
+                            @endcan
+
                             @can('task.list')
                                 <li>
                                     <a href="{{ route('admin.tasks.index') }}" class="waves-effect">

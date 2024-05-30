@@ -64,6 +64,14 @@
                                     @endif
                                 </td>
                             </tr>
+                            <tr>
+                                <td>Created On</td>
+                                <td>{{ $ranking->created_at->format('l, F j, Y') }}</td>
+                            </tr>
+                            <tr>
+                                <td>Updated On</td>
+                                <td>{{ $ranking->updated_at->format('l, F j, Y') }}</td>
+                            </tr>
                         </table>
                     </div>
                     {{-- /.table-responsive --}}

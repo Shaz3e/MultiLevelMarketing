@@ -159,6 +159,14 @@ class RolePermissionSeeder extends Seeder
             ['guard_name' => 'admin', 'name' => 'ranking.delete'],
             ['guard_name' => 'admin', 'name' => 'ranking.restore'],
             ['guard_name' => 'admin', 'name' => 'ranking.force.delete'],
+            // Payment Method
+            ['guard_name' => 'admin', 'name' => 'payment-method.list'],
+            ['guard_name' => 'admin', 'name' => 'payment-method.create'],
+            ['guard_name' => 'admin', 'name' => 'payment-method.read'],
+            ['guard_name' => 'admin', 'name' => 'payment-method.update'],
+            ['guard_name' => 'admin', 'name' => 'payment-method.delete'],
+            ['guard_name' => 'admin', 'name' => 'payment-method.restore'],
+            ['guard_name' => 'admin', 'name' => 'payment-method.force.delete'],
             // Support Ticket
             ['guard_name' => 'admin', 'name' => 'support-ticket.list'],
             ['guard_name' => 'admin', 'name' => 'support-ticket.create'],
