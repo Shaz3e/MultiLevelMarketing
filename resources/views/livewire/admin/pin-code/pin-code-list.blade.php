@@ -57,9 +57,12 @@
                             <thead>
                                 <tr>
                                     <th style="width: 10%">Created By</th>
+                                    <th style="width: 10%">Created On</th>
                                     <th style="width: 10%">Amount</th>
                                     <th style="width: 10%">Pin</th>
                                     <th style="width: 10%">Status</th>
+                                    <th style="width: 10%">Used At</th>
+                                    <th style="width: 10%">Used By</th>
                                     <th style="width: 10%"></th>
                                 </tr>
                             </thead>
@@ -75,15 +78,36 @@
                                             @endif
                                         </td>
                                         <td>
+                                            {{ $pin->created_at->diffForHumans() }}
+                                            <small class="d-block">{{ $pin->created_at->format('l, F j, Y') }}</small>
+                                        </td>
+                                        <td>
                                             {{ currency(DiligentCreators('currency'), ['symbol'])['symbol'] }}
                                             {{ $pin->amount }}
                                         </td>
-                                        <td>{{ $pin->pin }}</td>
+                                        <td>{{ $pin->pin_code }}</td>
                                         <td>
                                             @if ($pin->is_used)
                                                 <span class="badge bg-success">Used</span>
                                             @else
                                                 <span class="badge bg-danger">Unused</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($pin->used_at)
+                                                {{ $pin->used_at->diffForHumans() }}
+                                                <small class="d-block">{{ $pin->used_at->format('l, F j, Y') }}</small>
+                                            @else
+                                                <small>Never</small>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($pin->used_by)
+                                                <a href="{{ route('admin.users.show', $pin->used_by) }}">
+                                                    {{ $pin->usedBy->name }}
+                                                </a>
+                                            @else
+                                                -
                                             @endif
                                         </td>
                                         <td class="text-right">

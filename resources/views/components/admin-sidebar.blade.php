@@ -33,7 +33,7 @@
                             @can('pin-code.list')
                                 <li>
                                     <a href="{{ route('admin.pins.index') }}" class="waves-effect">
-                                        <i class="ri-dashboard-line"></i>
+                                        <i class="ri-key-line"></i>
                                         <span>Manage Pins</span>
                                     </a>
                                 </li>

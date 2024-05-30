@@ -15,7 +15,7 @@
             <div class="card" style="height: calc(100% - 15px)">
                 <div class="card-body">
                     <small class="d-block">Pin</small>
-                    <strong>{{ $pin->pin }}</strong>
+                    <strong>{{ $pin->pin_code }}</strong>
                 </div>
                 {{-- /.card-body --}}
             </div>
@@ -29,7 +29,7 @@
                     <strong>
                         {{ currency(DiligentCreators('currency'), ['symbol'])['symbol'] }}
                         {{ $pin->amount }}
-                        {{ currency(DiligentCreators('currency'),['name'])['name'] }}
+                        {{ currency(DiligentCreators('currency'), ['name'])['name'] }}
                     </strong>
                 </div>
                 {{-- /.card-body --}}
@@ -73,7 +73,77 @@
         </div>
         {{-- /.col --}}
     </div>
+
     {{-- /.row --}}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card" style="height: calc(100% - 15px)">
+                <div class="card-body">
+                    <small class="d-block">Used By</small>
+                    @if ($pin->used_by)
+                        <a href="{{ route('admin.users.show', $pin->used_by) }}">
+                            <strong>{{ $pin->usedBy->name }}</strong>
+                        </a>
+                    @else
+                        <strong>-</strong>
+                    @endif
+                </div>
+                {{-- /.card-body --}}
+            </div>
+            {{-- /.card --}}
+        </div>
+        {{-- /.col --}}
+        <div class="col-md-3">
+            <div class="card" style="height: calc(100% - 15px)">
+                <div class="card-body">
+                    <small class="d-block">Used At</small>
+                    @if ($pin->used_at)
+                        {{ $pin->used_at->diffForHumans() }}
+                        <small class="d-block">{{ $pin->used_at->format('l, F j, Y h:i A') }}</small>
+                    @else
+                        <small>Never</small>
+                    @endif
+                </div>
+                {{-- /.card-body --}}
+            </div>
+            {{-- /.card --}}
+        </div>
+        {{-- /.col --}}
+        <div class="col-md-3">
+            <div class="card" style="height: calc(100% - 15px)">
+                <div class="card-body">
+                    <small class="d-block">Created At</small>
+                    {{ $pin->created_at->diffForHumans() }}
+                    <small class="d-block">{{ $pin->created_at->format('l, F j, Y h:i A') }}</small>
+                </div>
+                {{-- /.card-body --}}
+            </div>
+            {{-- /.card --}}
+        </div>
+        {{-- /.col --}}
+        <div class="col-md-3">
+            <div class="card" style="height: calc(100% - 15px)">
+                <div class="card-body">
+                    <small class="d-block">Updated At</small>
+                    {{ $pin->updated_at->diffForHumans() }}
+                    <small class="d-block">{{ $pin->updated_at->format('l, F j, Y h:i A') }}</small>
+                </div>
+                {{-- /.card-body --}}
+            </div>
+            {{-- /.card --}}
+        </div>
+        {{-- /.col --}}
+    </div>
+    {{-- /.row --}}
+
+    {{-- Edit Button --}}
+    <div class="row">
+        <div class="col-12">
+            <a href="{{ route('admin.pins.edit', $pin) }}" class="btn btn-primary btn-sm">
+                <i class="ri-pencil-line align-middle me-1"></i> Edit
+            </a>
+        </div>
+    </div>
 @endsection
 
 @push('styles')

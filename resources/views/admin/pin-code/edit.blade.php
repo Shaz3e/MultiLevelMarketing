@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <form action="{{ route('admin.pins.update', $pin->id) }}" method="POST" class="needs-validation" novalidate>
+                <form action="{{ route('admin.pins.update', $pin) }}" method="POST" class="needs-validation" novalidate>
                     @csrf
                     @method('put')
                     <div class="card-body">
@@ -29,8 +29,8 @@
                                             </span>
                                         </div>
                                         <input type="number" name="amount" id="amount" class="form-control"
-                                            value="{{ old('amount', $pin->amount) }}" placeholder="Enter Amount" aria-label="Amount"
-                                            aria-describedby="basic-addon1" required>
+                                            value="{{ old('amount', $pin->amount) }}" placeholder="Enter Amount"
+                                            aria-label="Amount" aria-describedby="basic-addon1" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon1-append">
                                                 {{ currency(DiligentCreators('currency'), ['name'])['name'] }}
@@ -45,10 +45,11 @@
                             {{-- /.col --}}
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
-                                    <label for="pin">Generate Pin</label>
+                                    <label for="pin_code">Generate Pin</label>
                                     <div class="input-group mb-3">
-                                        <input type="text" id="pin" name="pin" class="form-control" placeholder="Generate Pin"
-                                            aria-label="Generate Pin" aria-describedby="generate_pin" value="{{ old('pin', $pin->pin) }}">
+                                        <input type="text" id="pin_code" name="pin_code" class="form-control"
+                                            placeholder="Generate Pin" aria-label="Generate Pin"
+                                            aria-describedby="generate_pin" value="{{ old('pin_code', $pin->pin_code) }}">
                                         <button class="btn btn-outline-primary" type="button"
                                             id="generate_pin">Generate</button>
                                     </div>
@@ -83,11 +84,14 @@
 @push('scripts')
     <script>
         $('#generate_pin').on('click', function() {
+            var button = $(this); // store the button element
+            button.text('Generating...'); // change button text to "Generating..."
             $.ajax({
                 type: 'GET',
                 url: '{{ route('admin.generate-pin') }}',
                 success: function(response) {
-                    $('#pin').val(response.pin);
+                    button.text('Generated'); // change button text to "Generated"
+                    $('#pin_code').val(response.pin_code);
                 }
             });
         });

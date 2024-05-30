@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('pin_codes', function (Blueprint $table) {
             $table->id();
-            $table->string('pin')->unique();
+            $table->string('pin_code')->unique();
             $table->decimal('amount', 10,2)->default(0.00);
             $table->foreignId('admin_id')->nullable();
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('set null');
             $table->foreignId('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->boolean('is_used')->default(false);
+            $table->foreignId('used_by')->nullable();
+            $table->foreign('used_by')->references('id')->on('users')->onDelete('set null');
+            $table->dateTime('used_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

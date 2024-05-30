@@ -44,10 +44,11 @@
                             {{-- /.col --}}
                             <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
-                                    <label for="pin">Generate Pin</label>
+                                    <label for="pin_code">Generate Pin</label>
                                     <div class="input-group mb-3">
-                                        <input type="text" id="pin" name="pin" class="form-control" placeholder="Generate Pin"
-                                            aria-label="Generate Pin" aria-describedby="generate_pin" value="{{ old('pin', $pin) }}">
+                                        <input type="text" id="pin_code" name="pin_code" class="form-control"
+                                            placeholder="Generate Pin" aria-label="Generate Pin"
+                                            aria-describedby="generate_pin" value="{{ old('pin_code', $pinCode) }}">
                                         <button class="btn btn-outline-primary" type="button"
                                             id="generate_pin">Generate</button>
                                     </div>
@@ -82,11 +83,14 @@
 @push('scripts')
     <script>
         $('#generate_pin').on('click', function() {
+            var button = $(this); // store the button element
+            button.text('Generating...'); // change button text to "Generating..."
             $.ajax({
                 type: 'GET',
                 url: '{{ route('admin.generate-pin') }}',
                 success: function(response) {
-                    $('#pin').val(response.pin);
+                    button.text('Generated'); // change button text to "Generated"
+                    $('#pin_code').val(response.pin_code);
                 }
             });
         });

@@ -34,15 +34,15 @@ class PinCodeController extends Controller
         Gate::authorize('create', PinCode::class);
 
 
-        $pin = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 9);
+        $pinCode = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 9);
 
         // check if the pin already exists in the database
-        if (PinCode::where('pin', $pin)->exists()) {
-            return $pin; // if the pin exists, generate a new one
+        if (PinCode::where('pin_code', $pinCode)->exists()) {
+            return $pinCode; // if the pin exists, generate a new one
         }
 
         return view('admin.pin-code.create', [
-            'pin' => $pin
+            'pinCode' => $pinCode
         ]);
     }
 
@@ -51,19 +51,18 @@ class PinCodeController extends Controller
      */
     public function store(StorePinCodeRequest $request)
     {
-        Log::info("Store method called");
         // Check Authorize
         Gate::authorize('create', PinCode::class);
-        
+
         // Validated request
         $validated = $request->validated();
 
         // Create record in database
-        $pin = PinCode::create($validated);
+        $pinCode = PinCode::create($validated);
 
         session()->flash('success', 'Pin Code has been created successfully!');
 
-        return $this->saveAndRedirect($request, 'pins', $pin->id);
+        return $this->saveAndRedirect($request, 'pins', $pinCode->id);
     }
 
     /**
@@ -117,14 +116,17 @@ class PinCodeController extends Controller
      */
     public function generatePin()
     {
-        // $pin = rand(100000000, 999999999); // generate a random 9-digit number
-        // Generate a random 9-character string including number and alphabet
-        $pin = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 9);
-
-        // check if the pin already exists in the database
-        if (PinCode::where('pin', $pin)->exists()) {
-            return $this->generatePin(); // if the pin exists, generate a new one
+        $attempts = 0;
+        do {
+            $pinCode = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 9);
+            $attempts++;
+        } while (PinCode::where('pin_code', $pinCode)->exists() && $attempts < 10); // try up to 10 times
+    
+        if ($attempts >= 10) {
+            // return an error message or take alternative action
+            return response()->json(['error' => 'Unable to generate a unique pin code']);
         }
-        return response()->json(['pin' => $pin]);
+    
+        return response()->json(['pin_code' => $pinCode, 'attempts' => $attempts]);
     }
 }

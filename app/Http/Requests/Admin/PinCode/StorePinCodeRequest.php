@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\PinCode;
 
 use App\Http\Requests\BaseFormRequest;
+use Illuminate\Validation\Rule;
 
 class StorePinCodeRequest extends BaseFormRequest
 {
@@ -14,11 +15,11 @@ class StorePinCodeRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'pin' => [
+            'pin_code' => [
                 'required',
                 'string',
                 'max:10',
-                'unique:pin_codes,pin',
+                Rule::unique('pin_codes', 'pin_code')->ignore($this->pin),
             ],
             'amount' => [
                 'required',
