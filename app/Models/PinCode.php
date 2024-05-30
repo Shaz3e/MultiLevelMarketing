@@ -10,13 +10,24 @@ class PinCode extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $filalble = [
+    protected $fillable = [
         'pin',
         'amount',
-        'customer_id',
+        'admin_id',
         'user_id',
         'is_used',
-    ];
+    ];    
 
+    // SoftDeletes
     protected $dates = ['deleted_at'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
 }

@@ -4,13 +4,15 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Traits\HasRoles;
+use OwenIt\Auditing\Auditable as AuditingAuditable;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Auditable
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, AuditingAuditable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -21,7 +23,24 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'address',
+        'country',
+        'state',
+        'city',
+        'zip_code',
+        'is_email_verified',
+        'is_phone_verified',
+        'is_2fa_verified',
+        'is_kyc_verified',
+        'status',
+        'is_active',
+        'company_id',
+        'remember_token',
     ];
+
+    // SoftDeletes
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,5 +63,35 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Company Relationship
+     */
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    /**
+     * Support Tickets Relationship
+     */
+    public function supportTickets()
+    {
+        return $this->hasMany(SupportTicket::class);
+    }
+
+    public function pincodes()
+    {
+        return $this->hasMany(PinCode::class, 'user_id');
+    }
+
+    protected function setAuditInclude()
+    {
+        // Get all columns from the model's table
+        $columns = $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+
+        // Set the $auditInclude property to include all columns
+        $this->auditInclude = $columns;
     }
 }

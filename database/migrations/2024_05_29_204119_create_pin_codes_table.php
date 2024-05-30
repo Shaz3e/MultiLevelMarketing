@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('pin')->unique();
             $table->decimal('amount', 10,2)->default(0.00);
-            $table->foreignId('customer_id')->nullable();
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('set null');
+            $table->foreignId('admin_id')->nullable();
+            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('set null');
             $table->foreignId('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->boolean('is_used')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
