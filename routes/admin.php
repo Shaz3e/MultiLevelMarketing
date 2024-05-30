@@ -72,6 +72,7 @@ use App\Http\Controllers\Admin\AppSetting\MailSettingController;
 use App\Http\Controllers\Admin\AppSetting\CurrencySettingController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\AppSetting\SmsSettingController;
+use App\Http\Controllers\Admin\RankingController;
 // Permission
 use App\Http\Controllers\Admin\RolePermission\PermissionController;
 
@@ -186,6 +187,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('pins', PinCodeController::class);
         Route::get('generate-pin', [PinCodeController::class, 'generatePin'])
             ->name('generate-pin');
+
+        /**
+         * Ranking
+         */
+        Route::resource('rankings', RankingController::class);
 
         /**
          * Tasks

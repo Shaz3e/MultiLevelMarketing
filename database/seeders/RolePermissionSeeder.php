@@ -151,6 +151,14 @@ class RolePermissionSeeder extends Seeder
             ['guard_name' => 'admin', 'name' => 'pin-code.delete'],
             ['guard_name' => 'admin', 'name' => 'pin-code.restore'],
             ['guard_name' => 'admin', 'name' => 'pin-code.force.delete'],
+            // Ranking
+            ['guard_name' => 'admin', 'name' => 'ranking.list'],
+            ['guard_name' => 'admin', 'name' => 'ranking.create'],
+            ['guard_name' => 'admin', 'name' => 'ranking.read'],
+            ['guard_name' => 'admin', 'name' => 'ranking.update'],
+            ['guard_name' => 'admin', 'name' => 'ranking.delete'],
+            ['guard_name' => 'admin', 'name' => 'ranking.restore'],
+            ['guard_name' => 'admin', 'name' => 'ranking.force.delete'],
             // Support Ticket
             ['guard_name' => 'admin', 'name' => 'support-ticket.list'],
             ['guard_name' => 'admin', 'name' => 'support-ticket.create'],

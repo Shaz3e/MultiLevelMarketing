@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('rankings', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->nullable();
-            $table->string('level')->nullable();
-            $table->string('name')->nullable();
+            $table->string('icon')->nullable();
+            $table->integer('level')->unique()->nullable();
+            $table->string('name')->unique()->nullable();
             $table->string('reward')->nullable();
-            $table->string('bonus')->nullable();
+            $table->string('reward_image')->nullable();
+            $table->decimal('bonus_point', 7, 0)->nullable();
             $table->string('is_active')->nullable();
             $table->softDeletes();
             $table->timestamps();

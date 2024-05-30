@@ -47,7 +47,7 @@ function calcTime($startTime, $endTime)
     }
 }
 
-function currencyFormat($value)
+function currencyFormat($value, $decimals = 2)
 {
-    return number_format($value,2);
+    return number_format($value,$decimals);
 }

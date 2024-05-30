@@ -30,11 +30,22 @@
                                     <span>Dashboard</span>
                                 </a>
                             </li>
+                            {{-- Pin Codes --}}
                             @can('pin-code.list')
                                 <li>
                                     <a href="{{ route('admin.pins.index') }}" class="waves-effect">
                                         <i class="ri-key-line"></i>
                                         <span>Manage Pins</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+                            {{-- Ranking --}}
+                            @can('ranking.list')
+                                <li>
+                                    <a href="{{ route('admin.rankings.index') }}" class="waves-effect">
+                                        <i class="ri-medal-line"></i>
+                                        <span>Manage Ranking</span>
                                     </a>
                                 </li>
                             @endcan
