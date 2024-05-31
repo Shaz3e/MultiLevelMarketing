@@ -17,74 +17,199 @@
                 <form action="{{ route('admin.users.store') }}" method="POST" class="needs-validation" novalidate>
                     @csrf
                     <div class="card-body">
-                        <div class="row mb-3">
-                            <label for="name" class="col-sm-2 col-form-label">Full Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="name" id="name" class="form-control"
-                                    value="{{ old('name') }}" required>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" name="name" id="name" class="form-control"
+                                        value="{{ old('name') }}" required>
+                                </div>
                                 @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div>
-                        {{-- /.row --}}
-                        <div class="row mb-3">
-                            <label for="email" class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-10">
-                                <input name="email" id="email" class="form-control input-mask"
-                                    data-inputmask="'alias': 'email'" value="{{ old('email') }}" required>
+                            {{-- /.col --}}
+                            <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input name="email" id="email" class="form-control input-mask"
+                                        data-inputmask="'alias': 'email'" value="{{ old('email') }}" required>
+                                </div>
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div>
-                        {{-- /.row --}}
-                        <div class="row mb-3">
-                            <label for="company_id" class="col-sm-2 col-form-label">Company</label>
-                            <div class="col-sm-10">
-                                <select class="form-control select2" name="company_id" id="company_id">
-                                    <option value="">Select</option>
-                                </select>
-                                @error('company_id')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                        {{-- /.row --}}
-                        <div class="row mb-3">
-                            <label for="password" class="col-sm-2 col-form-label">Password</label>
-                            <div class="col-sm-10">
-                                <input type="password" name="password" id="password" class="form-control" required>
+                            {{-- /.col --}}
+                            <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="password">New Password</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" name="password" id="password"
+                                            value="{{ old('password') }}" minlength="8" maxlength="64" />
+                                        <div class="input-group-append">
+                                            <button type="button" id="generatePasswordBtn"
+                                                class="btn btn-outline-primary">Generate</button>
+                                        </div>
+                                    </div>
+                                </div>
                                 @error('password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div>
-                        {{-- /.row --}}
-                        <div class="row mb-3">
-                            <label for="confirm_password" class="col-sm-2 col-form-label">Confirm Password</label>
-                            <div class="col-sm-10">
-                                <input type="password" name="confirm_password" id="confirm_password" class="form-control"
-                                    required>
-                                @error('confirm_password')
+                            {{-- /.col --}}
+                            <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="pin_code">Pin Code</label>
+                                    <div class="input-group">
+                                        <input type="text" id="pin_code" name="pin_code" class="form-control"
+                                            placeholder="Check Pin" aria-label="Check Pin" aria-describedby="check_pin"
+                                            value="{{ old('pin_code') }}">
+                                        <button class="btn btn-outline-primary" type="button" id="check_pin">Check</button>
+                                    </div>
+                                    <span id="pinStatus"></span>
+                                </div>
+                                @error('pin_code')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div>
-                        {{-- /.row --}}
-                        <div class="row mb-3">
-                            <label for="is_active" class="col-sm-2 col-form-label">Can Login?</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" name="is_active" required>
-                                    <option value="1" {{ old('is_active') == 1 ? 'selected' : '' }}>Yes - User can
-                                        login</option>
-                                    <option value="0" {{ old('is_active') == 0 ? 'selected' : '' }}>No - User cannot
-                                        login</option>
-                                </select>
+                            {{-- /.col --}}
+                            <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="company_id">Company
+                                        <small><a href="{{ route('admin.companies.create') }}">
+                                                Create New</a></small>
+                                    </label>
+                                    <select name="company_id" id="company_id" class="form-control">
+                                        <option value="">Select</option>
+                                    </select>
+                                </div>
+                                @error('company_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{-- /.col --}}
+                            <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="text" name="phone" id="phone" class="form-control"
+                                        value="{{ old('phone') }}" required>
+                                </div>
+                                @error('phone')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{-- /.col --}}
+                            <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" name="address" id="address" class="form-control"
+                                        value="{{ old('address') }}" required>
+                                </div>
+                                @error('address')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{-- /.col --}}
+                            {{-- <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <input type="text" name="country" id="country" class="form-control"
+                                        value="{{ old('country') }}" required>
+                                </div>
+                                @error('country')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div> --}}
+                            {{-- /.col --}}
+                            {{-- <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    <input type="text" name="state" id="state" class="form-control"
+                                        value="{{ old('state') }}" required>
+                                </div>
+                                @error('state')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div> --}}
+                            {{-- /.col --}}
+                            {{-- <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" name="city" id="city" class="form-control"
+                                        value="{{ old('city') }}" required>
+                                </div>
+                                @error('city')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div> --}}
+                            {{-- /.col --}}
+                            <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="zip_code">Zip Code</label>
+                                    <input type="text" name="zip_code" id="zip_code" class="form-control"
+                                        value="{{ old('zip_code') }}" required>
+                                </div>
+                                @error('zip_code')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{-- /.col --}}
+                            <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="is_email_verified">Email Verified?</label>
+                                    <select name="is_email_verified" id="is_email_verified" class="form-control"
+                                        value="{{ old('is_email_verified') }}" required>
+                                        <option value="1">Yes</option>
+                                        <option value="0" selected>No</option>
+                                    </select>
+                                </div>
+                                @error('is_email_verified')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{-- /.col --}}
+                            <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="is_phone_verified">Phone Verified?</label>
+                                    <select name="is_phone_verified" id="is_phone_verified" class="form-control"
+                                        value="{{ old('is_phone_verified') }}" required>
+                                        <option value="1">Yes</option>
+                                        <option value="0" selected>No</option>
+                                    </select>
+                                </div>
+                                @error('is_phone_verified')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{-- /.col --}}
+                            <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="is_kyc_verified">KYC Verified?</label>
+                                    <select name="is_kyc_verified" id="is_kyc_verified" class="form-control"
+                                        value="{{ old('is_kyc_verified') }}" required>
+                                        <option value="1">Yes</option>
+                                        <option value="0" selected>No</option>
+                                    </select>
+                                </div>
+                                @error('is_kyc_verified')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{-- /.col --}}
+                            <div class="col-md-3 col-sm-12 mb-3">
+                                <div class="form-group">
+                                    <label for="is_active">Can Login?</label>
+                                    <select name="is_active" id="is_active" class="form-control"
+                                        value="{{ old('is_active') }}" required>
+                                        <option value="1">Yes</option>
+                                        <option value="0" selected>No</option>
+                                    </select>
+                                </div>
                                 @error('is_active')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            {{-- /.col --}}
                         </div>
                         {{-- /.row --}}
                     </div>
@@ -137,6 +262,41 @@
                     }
                 },
                 minimumInputLength: 3
+            });
+
+            // Check Pin Code via Ajax
+            $('#check_pin').on('click', function(e) {
+                e.preventDefault();
+                let pinCode = $('#pin_code').val();
+                $.ajax({
+                    url: `{{ route('admin.check-pin') }}`,
+                    type: 'GET',
+                    data: {
+                        pin_code: pinCode
+                    },
+                    success: function(result) {
+                        // Update success message #pinStatus
+                        // $('#pinStatus').html(result.message);
+                        if (result.success) {
+                            $('#pinStatus').html('<span style="color: green;">' + result
+                                .message + '</span>');
+                        } else {
+                            $('#pinStatus').html('<span style="color: red;">' + result.message +
+                                '</span>');
+                        }
+                    }
+                });
+            });
+
+
+            // Generate Password
+            $('#generatePasswordBtn').click(function(e) {
+                let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                let result = '';
+                for (let i = 0; i < 8; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                $("#password").val(result);
             });
         });
     </script>

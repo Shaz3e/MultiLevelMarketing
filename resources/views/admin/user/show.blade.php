@@ -16,16 +16,13 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table">>
                             <tr>
-                                <td>Name</td>
-                                <td>Company</td>
-                                <td>Email</td>
-                                <td>Status</td>
-                                <td>Created At</td>
+                                <td>Full Name</td>
+                                <td>{{ $user->name }}</td>
                             </tr>
                             <tr>
-                                <td>{{ $user->name }}</td>
+                                <td>Company</td>
                                 <td>
                                     @if ($user->company != null)
                                         <a href="{{ route('admin.companies.show', $user->company->id) }}">
@@ -33,7 +30,13 @@
                                         </a>
                                     @endif
                                 </td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
                                 <td>{{ $user->email }}</td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
                                 <td>
                                     @if ($user->is_active)
                                         <span class="badge bg-success">Active</span>
@@ -41,7 +44,82 @@
                                         <span class="badge bg-danger">Inactive</span>
                                     @endif
                                 </td>
+                            </tr>
+                            <tr>
+                                <td>Pin Code</td>
+                                <td>{{ $user->pin_code }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Phone</td>
+                                <td>{{ $user->phone }}</td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td>{{ $user->address }}</td>
+                            </tr>
+                            {{-- <tr>
+                                <td>Country</td>
+                                <td>{{ $user->country }}</td>
+                            </tr>
+                            <tr>
+                                <td>State</td>
+                                <td>{{ $user->state }}</td>
+                            <tr>
+                                <td>City</td>
+                                <td>{{ $user->city }}</td>
+                            </tr> --}}
+                            <tr>
+                                <td>Zip Code</td>
+                                <td>{{ $user->zip_code }}</td>
+                            </tr>
+                            <tr>
+                                <td>Email Verified</td>
+                                <td>
+                                    @if ($user->is_email_verified)
+                                        <span class="badge bg-success">Yes</span>
+                                    @else
+                                        <span class="badge bg-danger">No</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Phone Verified</td>
+                                <td>
+                                    @if ($user->is_phone_verified)
+                                        <span class="badge bg-success">Yes</span>
+                                    @else
+                                        <span class="badge bg-danger">No</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>KYC Verified</td>
+                                <td>
+                                    @if ($user->is_kyc_verified)
+                                        <span class="badge bg-success">Yes</span>
+                                    @else
+                                        <span class="badge bg-danger">No</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Can Login</td>
+                                <td>
+                                    @if ($user->is_active)
+                                        <span class="badge bg-success">Yes</span>
+                                    @else
+                                        <span class="badge bg-danger">No</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Created At</td>
                                 <td>{{ $user->created_at->format('l, F j, Y') }}</td>
+                            </tr>
+                            <tr>
+                                <td>Updated At</td>
+                                <td>{{ $user->updated_at->format('l, F j, Y') }}</td>
                             </tr>
                         </table>
                     </div>
@@ -49,58 +127,6 @@
 
                     <a href="{{ route('admin.users.edit', $user) }}">Edit</a>
                 </div>
-            </div>
-            {{-- /.card --}}
-        </div>
-        {{-- /.col --}}
-    </div>
-    {{-- /.row --}}
-
-    {{-- Show Unpaid Invoice List --}}
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Unpaid / Partial paid Invoices</h5>
-                </div>
-                {{-- /.card-header --}}
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Invoice#</th>
-                                    <th>Invoice Date</th>
-                                    <th>Due Date</th>
-                                    <th>Status</th>
-                                    <th>Total</th>
-                                    <th>Total Paid</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($user->invoices()->latest()->whereIn('status', [App\Models\Invoice::STATUS_UNPAID, App\Models\Invoice::STATUS_PARTIALLY_PAID])->get() as $invoice)
-                                    <tr>
-                                        <td>{{ $invoice->id }}</td>
-                                        <td>{{ optional($invoice->invoice_date)->format('l, jS M Y') }}</td>
-                                        <td>{{ optional($invoice->due_date)->format('l, jS M Y') }}</td>
-                                        <td>{{ $invoice->status }}</td>
-                                        <td>{{ $invoice->total }}</td>
-                                        <td>{{ $invoice->total_paid }}</td>
-                                        <td>
-                                            <a href="{{ route('admin.invoices.show', $invoice->id) }}"
-                                                class="btn btn-sm btn-outline-info">
-                                                <i class="ri-eye-line"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    {{-- /.table-responsive --}}
-                </div>
-                {{-- /.card-body --}}
             </div>
             {{-- /.card --}}
         </div>

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('cascade');
             $table->decimal('deposit', 10, 2)->default(0.00)->nullable();
             $table->decimal('withdraw', 10, 2)->default(0.00)->nullable();
+            $table->string('note')->nullable();
             $table->string('status')->default('Pending');
             $table->foreignId('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('admins')->onDelete('cascade');

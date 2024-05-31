@@ -196,6 +196,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('pins', PinCodeController::class);
         Route::get('generate-pin', [PinCodeController::class, 'generatePin'])
             ->name('generate-pin');
+        Route::get('check-pin', [PinCodeController::class, 'checkPin'])
+            ->name('check-pin');
 
         /**
          * Ranking

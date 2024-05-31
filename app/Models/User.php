@@ -19,10 +19,12 @@ class User extends Authenticatable implements Auditable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+    protected $fillable = [        
+        'company_id',
         'name',
         'email',
         'password',
+        'pin_code',
         'phone',
         'address',
         'country',
@@ -31,11 +33,8 @@ class User extends Authenticatable implements Auditable
         'zip_code',
         'is_email_verified',
         'is_phone_verified',
-        'is_2fa_verified',
         'is_kyc_verified',
-        'status',
         'is_active',
-        'company_id',
         'remember_token',
     ];
 

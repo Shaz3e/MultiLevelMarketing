@@ -24,9 +24,7 @@ return new class extends Migration
             $table->string('zip_code')->nullable();
             $table->string('is_email_verified')->default(false);
             $table->string('is_phone_verified')->default(false);
-            $table->string('is_2fa_verified')->default(false);
             $table->string('is_kyc_verified')->default(false);
-            $table->string('status')->default("Inactive");
             $table->boolean('is_active')->default(false);
             $table->softDeletes();
             $table->timestamps();

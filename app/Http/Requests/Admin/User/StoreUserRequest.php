@@ -3,8 +3,6 @@
 namespace App\Http\Requests\Admin\User;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Models\Company;
-use App\Models\User;
 use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends BaseFormRequest
@@ -28,6 +26,24 @@ class StoreUserRequest extends BaseFormRequest
                 'nullable',
                 Rule::exists('companies', 'id'),
             ],
+            'pin_code' => [
+                'nullable',
+                // Rule::exists('pin_codes', 'pin_code'),
+                Rule::exists('pin_codes', 'pin_code')->where(function ($query) {
+                    $query->where('is_used', 0);
+                }),
+            ],
+            'phone' => ['nullable', 'max:30'],
+            'address' => ['nullable', 'max:255'],
+            // 'country' => ['nullable', 'max:100'],
+            // 'state' => ['nullable', 'max:100'],
+            // 'city' => ['nullable', 'max:100'],
+            'zip_code' => [
+                'nullable', 'max:10'
+            ],
+            'is_email_verified' => ['required', 'boolean'],
+            'is_phone_verified' => ['required', 'boolean'],
+            'is_kyc_verified' => ['required', 'boolean'],
             'is_active' => [
                 'required', 'boolean',
             ],
@@ -38,17 +54,11 @@ class StoreUserRequest extends BaseFormRequest
                 'password' => [
                     'required', 'string', 'min:8', 'max:255',
                 ],
-                'confirm_password' => [
-                    'required', 'same:password',
-                ],
             ]);
         } else {
             $rules = array_merge($rules, [
                 'password' => [
                     'nullable', 'string', 'min:8', 'max:255',
-                ],
-                'confirm_password' => [
-                    'nullable', 'same:password',
                 ],
             ]);
         }

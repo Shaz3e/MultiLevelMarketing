@@ -121,12 +121,30 @@ class PinCodeController extends Controller
             $pinCode = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 9);
             $attempts++;
         } while (PinCode::where('pin_code', $pinCode)->exists() && $attempts < 10); // try up to 10 times
-    
+
         if ($attempts >= 10) {
             // return an error message or take alternative action
             return response()->json(['error' => 'Unable to generate a unique pin code']);
         }
-    
+
         return response()->json(['pin_code' => $pinCode, 'attempts' => $attempts]);
+    }
+
+    /**
+     * Check Pin Code
+     */
+    public function checkPin(Request $request)
+    {
+        $pinCode = $request->pin_code;
+        $pin = PinCode::where('pin_code', $pinCode)->first();
+        if ($pin) {
+            if ($pin->is_used) {
+                return response()->json(['success' => false, 'message' => 'Pin code is already used']);
+            } else {
+                return response()->json(['success' => true, 'message' => 'Pin code is valid and unused']);
+            }
+        } else {
+            return response()->json(['success' => false, 'message' => 'Pin code is invalid']);
+        }
     }
 }
