@@ -31,6 +31,10 @@ use App\Http\Controllers\Admin\RankingController;
 // Payment Methods
 use App\Http\Controllers\Admin\PaymentMethodController;
 
+// Ledger / Deposit
+use App\Http\Controllers\Admin\LedgerDepositController;
+use App\Http\Controllers\Admin\LedgerWithdrawController;
+
 // Tasks
 use App\Http\Controllers\Admin\TaskController;
 
@@ -78,7 +82,6 @@ use App\Http\Controllers\Admin\AppSetting\MailSettingController;
 use App\Http\Controllers\Admin\AppSetting\CurrencySettingController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\AppSetting\SmsSettingController;
-
 // Permission
 use App\Http\Controllers\Admin\RolePermission\PermissionController;
 
@@ -203,6 +206,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
          * Payment Methods
          */
         Route::resource('payment-methods', PaymentMethodController::class);
+        // Search Users
+        Route::get('search-payment-methods', [PaymentMethodController::class, 'searchPaymentMethods'])
+            ->name('search.payment-methods');
+
+        // Ledger
+        Route::prefix('ledger')->name('ledger.')->group(function(){
+            Route::resource('deposits', LedgerDepositController::class);
+            Route::resource('withdraws', LedgerWithdrawController::class);
+        });
 
         /**
          * Tasks

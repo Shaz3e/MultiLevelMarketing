@@ -117,4 +117,28 @@ class PaymentMethodController extends Controller
 
         return $this->saveAndRedirect($request, 'payment-methods', $paymentMethod->id);
     }
+
+    /**
+     * Search Payment Methods
+     */
+    public function searchPaymentMethods(Request $request)
+    {
+        // Check Authorize
+        Gate::authorize('create', PaymentMethod::class);
+
+        $term = $request->input('term');
+        $paymentMethods = PaymentMethod::where('name', 'like', '%' . $term . '%')
+            ->orWhere('payment_detail', 'like', '%' . $term . '%')
+            ->select('id', 'name')
+            ->get();
+
+        return response()->json([
+            'results' => $paymentMethods->map(function ($paymentMethod) {
+                return [
+                    'id' => $paymentMethod->id,
+                    'text' => $paymentMethod->name
+                ];
+            })
+        ]);
+    }
 }

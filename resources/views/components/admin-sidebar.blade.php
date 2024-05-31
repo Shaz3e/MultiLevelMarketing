@@ -60,6 +60,30 @@
                                 </li>
                             @endcan
 
+                            {{-- Ranking --}}
+                            @can('ledger.list')
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <i class="ri-bank-line"></i>
+                                        <span>Manage Ledger</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li class="{{ request()->routeIs('admin.ledger.deposits.*') ? 'mm-active' : '' }}">
+                                            <a href="{{ route('admin.ledger.deposits.index') }}"
+                                                class="{{ request()->routeIs('admin.ledger.deposits.*') ? 'active' : '' }}">
+                                                Deposits
+                                            </a>
+                                        </li>
+                                        <li class="{{ request()->routeIs('admin.ledger.withdraws.*') ? 'mm-active' : '' }}">
+                                            <a href="{{ route('admin.ledger.withdraws.index') }}"
+                                                class="{{ request()->routeIs('admin.ledger.withdraws.*') ? 'active' : '' }}">
+                                                Withdraw
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endcan
+
                             @can('task.list')
                                 <li>
                                     <a href="{{ route('admin.tasks.index') }}" class="waves-effect">
@@ -269,7 +293,8 @@
                                         @endcan
                                         {{-- Ticket Priority --}}
                                         @can('ticket-priority.list')
-                                            <li class="{{ request()->routeIs('admin.ticket-priority.*') ? 'mm-active' : '' }}">
+                                            <li
+                                                class="{{ request()->routeIs('admin.ticket-priority.*') ? 'mm-active' : '' }}">
                                                 <a href="{{ route('admin.ticket-priority.index') }}"
                                                     class="{{ request()->routeIs('admin.ticket-priority.*') ? 'active' : '' }}">
                                                     Ticket Priority

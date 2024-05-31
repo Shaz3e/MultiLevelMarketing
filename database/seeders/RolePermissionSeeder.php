@@ -159,14 +159,14 @@ class RolePermissionSeeder extends Seeder
             ['guard_name' => 'admin', 'name' => 'ranking.delete'],
             ['guard_name' => 'admin', 'name' => 'ranking.restore'],
             ['guard_name' => 'admin', 'name' => 'ranking.force.delete'],
-            // Payment Method
-            ['guard_name' => 'admin', 'name' => 'payment-method.list'],
-            ['guard_name' => 'admin', 'name' => 'payment-method.create'],
-            ['guard_name' => 'admin', 'name' => 'payment-method.read'],
-            ['guard_name' => 'admin', 'name' => 'payment-method.update'],
-            ['guard_name' => 'admin', 'name' => 'payment-method.delete'],
-            ['guard_name' => 'admin', 'name' => 'payment-method.restore'],
-            ['guard_name' => 'admin', 'name' => 'payment-method.force.delete'],
+            // Ledger
+            ['guard_name' => 'admin', 'name' => 'ledger.list'],
+            ['guard_name' => 'admin', 'name' => 'ledger.create'],
+            ['guard_name' => 'admin', 'name' => 'ledger.read'],
+            ['guard_name' => 'admin', 'name' => 'ledger.update'],
+            ['guard_name' => 'admin', 'name' => 'ledger.delete'],
+            ['guard_name' => 'admin', 'name' => 'ledger.restore'],
+            ['guard_name' => 'admin', 'name' => 'ledger.force.delete'],
             // Support Ticket
             ['guard_name' => 'admin', 'name' => 'support-ticket.list'],
             ['guard_name' => 'admin', 'name' => 'support-ticket.create'],
@@ -227,6 +227,14 @@ class RolePermissionSeeder extends Seeder
             ['guard_name' => 'admin', 'name' => 'payment-method-setting.list'],
             ['guard_name' => 'admin', 'name' => 'payment-method-setting.read'],
             ['guard_name' => 'admin', 'name' => 'payment-method-setting.update'],
+            // Payment Method
+            ['guard_name' => 'admin', 'name' => 'payment-method.list'],
+            ['guard_name' => 'admin', 'name' => 'payment-method.create'],
+            ['guard_name' => 'admin', 'name' => 'payment-method.read'],
+            ['guard_name' => 'admin', 'name' => 'payment-method.update'],
+            ['guard_name' => 'admin', 'name' => 'payment-method.delete'],
+            ['guard_name' => 'admin', 'name' => 'payment-method.restore'],
+            ['guard_name' => 'admin', 'name' => 'payment-method.force.delete'],
             
             // Mail Setting
             ['guard_name' => 'admin', 'name' => 'mail-setting.list'],
