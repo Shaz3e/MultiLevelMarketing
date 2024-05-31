@@ -11,10 +11,9 @@ class Ledger extends Model
     use HasFactory, SoftDeletes;
 
     // Ledger Status
-    const STATUS_INITIATED = "Initiated";
     const STATUS_PENDING = "Pending";
     const STATUS_REJECTED = "Rejected";
-    const STATUS_PROCESSING = "In Process";
+    const STATUS_HOLD = "Hold";
     const STATUS_PAID = "Paid";
 
     protected $fillable = [
@@ -33,10 +32,9 @@ class Ledger extends Model
     public static function getStatuses()
     {
         return [
-            self::STATUS_INITIATED,
             self::STATUS_PENDING,
             self::STATUS_REJECTED,
-            self::STATUS_PROCESSING,
+            self::STATUS_HOLD,
             self::STATUS_PAID,
         ];
     }
@@ -57,14 +55,12 @@ class Ledger extends Model
     public function getStatusColor()
     {
         switch ($this->status) {
-            case self::STATUS_INITIATED:
-                return 'bg-dark';
             case self::STATUS_PENDING:
                 return 'bg-info';
             case self::STATUS_REJECTED:
                 return 'bg-danger';
-            case self::STATUS_PROCESSING:
-                return 'bg-primary';
+            case self::STATUS_HOLD:
+                return 'bg-warning';
             case self::STATUS_PAID:
                 return 'bg-success';
         }
