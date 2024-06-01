@@ -45,7 +45,7 @@
                             @enderror
                         </div>
                         <div class="col-12 mb-2">
-                            <input class="form-control input-mask" data-inputmask="'alias':'email'" placeholder="Email"
+                            <input class="form-control input-mask" name="email" data-inputmask="'alias':'email'" placeholder="Email"
                                 value="{{ old('email') }}" required>
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
@@ -61,6 +61,13 @@
                             <input type="password" name="confirm_password" class="form-control"
                                 placeholder="Confirm Password" required>
                             @error('confirm_password')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-12 mb-2">
+                            <input type="text" name="pin_code" class="form-control"
+                                placeholder="Pin Code" required>
+                            @error('pin_code')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

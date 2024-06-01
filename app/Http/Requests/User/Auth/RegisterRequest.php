@@ -24,7 +24,7 @@ class RegisterRequest extends BaseFormRequest
             'email' => [
                 'required',
                 'email',
-                Rule::unique(User::class),
+                Rule::unique(User::class,'email'),
             ],
             'password' => [
                 'required',
@@ -34,6 +34,12 @@ class RegisterRequest extends BaseFormRequest
             'confirm_password' => [
                 'required',
                 'same:password',
+            ],
+            'pin_code' => [
+                'required',
+                Rule::exists('pin_codes', 'pin_code')->where( function($query){
+                    $query->where('is_used', 0);
+                }),
             ],
         ];
     }

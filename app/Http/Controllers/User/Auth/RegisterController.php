@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Auth\RegisterRequest;
+use App\Models\PinCode;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,7 +25,11 @@ class RegisterController extends Controller
         $user->name = $validated['name'];
         $user->email = $validated['email'];
         $user->password = Hash::make($validated['password']);
+        $user->pin_code = $validated['pin_code'];
         $user->save();
+
+        // Change is_used=1 where pin_code = current
+        PinCode::where('pin_code', $validated['pin_code'])->update(['is_used' => 1]);
 
         session()->flash('success', 'Your account created successfully!');
 
