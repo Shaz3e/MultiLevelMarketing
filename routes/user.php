@@ -12,8 +12,12 @@ use App\Http\Controllers\User\Auth\LockController;
 
 // Dashboard
 use App\Http\Controllers\User\DashboardController;
+
 // Profile Controller
 use App\Http\Controllers\User\ProfileController;
+
+// Pin Code
+use App\Http\Controllers\User\PinCodeController;
 
 // Support Tickets
 use App\Http\Controllers\User\SupportTicketController;
@@ -67,12 +71,20 @@ Route::middleware('auth')->group(function () {
     Route::post('my-profile', [ProfileController::class, 'profileStore'])
         ->name('profile.store');
 
+    // Pin Code
+    Route::resource('pins', PinCodeController::class);
+    Route::get('generate-pin', [PinCodeController::class, 'generatePin'])
+        ->name('generate-pin');
+    Route::get('check-pin', [PinCodeController::class, 'checkPin'])
+        ->name('check-pin');
+
+
     // Support Ticket
     Route::resource('support-tickets', SupportTicketController::class);
-    
+
     // Support Ticket Reply
     Route::post('support-tickets-reply/{supportTicketId}', [SupportTicketController::class, 'ticketReply'])
-    ->name('support-tickets.reply');
+        ->name('support-tickets.reply');
 
     // Upload attachments for support tickets
     Route::post('support-tickets/upload-attachments', [SupportTicketController::class, 'uploadAttachments'])

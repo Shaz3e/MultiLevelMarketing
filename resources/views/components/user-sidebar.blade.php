@@ -29,18 +29,24 @@
                                     <span>Dashboard</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{ route('support-tickets.index') }}" class="waves-effect">
+                            <li class="{{ request()->routeIs('pins.*') ? 'mm-active' : '' }}">
+                                <a href="{{ route('pins.index') }}" class="waves-effect {{ request()->routeIs('pins.*') ? 'active' : '' }}">
+                                    <i class="ri-key-line"></i>
+                                    <span>Manage Pins</span>
+                                </a>
+                            </li>
+                            <li class="{{ request()->routeIs('support-tickets.*') ? 'mm-active' : '' }}">
+                                <a href="{{ route('support-tickets.index') }}" class="waves-effect {{ request()->routeIs('support-tickets.*') ? 'mm-active' : '' }}">
                                     <i class="ri-questionnaire-line"></i>
                                     <span>My Tickets</span>
                                 </a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="{{ route('admin.dashboard') }}" class="waves-effect">
                                     <i class="ri-file-list-3-line"></i>
                                     <span>Knowledgebase</span>
                                 </a>
-                            </li>
+                            </li> --}}
 
                         </ul>
                     </div>

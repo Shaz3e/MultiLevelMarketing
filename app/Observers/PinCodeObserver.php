@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\PinCode;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class PinCodeObserver
 {
@@ -12,11 +13,14 @@ class PinCodeObserver
      */
     public function created(PinCode $pinCode): void
     {
-        // check auth is admin
-        if (auth()->guard('admin')) {
-            $pinCode->admin_id = auth()->guard('admin')->user()->id;
+        $admin = Auth::guard('admin')->user();
+        if ($admin) {
+            $pinCode->admin_id = $admin->id;
         } else {
-            $pinCode->user_id = auth()->user()->id;
+            $user = Auth::user();
+            if ($user) {
+                $pinCode->user_id = $user->id;
+            }
         }
         $pinCode->save();
     }

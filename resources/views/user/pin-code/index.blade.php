@@ -5,11 +5,11 @@
         'title' => 'Pins',
         'breadcrumbs' => [
             ['text' => 'Dashboard', 'link' => route('admin.dashboard')],
-            ['text' => 'View List', 'link' => null],
+            ['text' => 'Pin Code List', 'link' => null],
         ],
     ])
 
-    @livewire('admin.pin-code.pin-code-list')
+    @livewire('user.pin-code.pin-code-list')
 @endsection
 
 @push('styles')

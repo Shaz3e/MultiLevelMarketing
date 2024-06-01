@@ -105,15 +105,21 @@
                     <div class="px-lg-2">
                         <div class="row g-0">
                             <div class="col">
-                                <a class="dropdown-icon-item" href="{{ route('admin.tasks.create') }}">
-                                    <i class="ri-task-line"></i>
-                                    <span>Tasks</span>
-                                </a>
-                            </div>
-                            <div class="col">
                                 <a class="dropdown-icon-item" href="{{ route('admin.users.create') }}">
                                     <i class="ri-user-2-fill"></i>
                                     <span>Users</span>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a class="dropdown-icon-item" href="{{ route('admin.pins.create') }}">
+                                    <i class="ri-key-line"></i>
+                                    <span>Create Pin</span>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a class="dropdown-icon-item" href="{{ route('admin.tasks.create') }}">
+                                    <i class="ri-task-line"></i>
+                                    <span>Tasks</span>
                                 </a>
                             </div>
                         </div>

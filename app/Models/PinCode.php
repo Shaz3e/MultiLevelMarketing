@@ -11,10 +11,10 @@ class PinCode extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'user_id',
+        'admin_id',
         'pin_code',
         'amount',
-        'admin_id',
-        'user_id',
         'is_used',
     ];    
 
