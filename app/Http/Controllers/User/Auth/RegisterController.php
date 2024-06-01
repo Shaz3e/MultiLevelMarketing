@@ -29,7 +29,10 @@ class RegisterController extends Controller
         $user->save();
 
         // Change is_used=1 where pin_code = current
-        PinCode::where('pin_code', $validated['pin_code'])->update(['is_used' => 1]);
+        PinCode::where('pin_code', $validated['pin_code'])->update([
+            'is_used' => 1,
+            'used_at' => now(),
+        ]);
 
         session()->flash('success', 'Your account created successfully!');
 
