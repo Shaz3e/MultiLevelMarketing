@@ -9,7 +9,7 @@ use App\Http\Controllers\User\Auth\ForgotPasswordController;
 use App\Http\Controllers\User\Auth\ResetPasswordController;
 use App\Http\Controllers\User\Auth\LogoutController;
 use App\Http\Controllers\User\Auth\LockController;
-
+use App\Http\Controllers\User\Auth\VerifyController;
 // Dashboard
 use App\Http\Controllers\User\DashboardController;
 
@@ -29,6 +29,10 @@ Route::middleware('guest')->group(function () {
         ->name('register');
     Route::post('register', [RegisterController::class, 'post'])
         ->name('register.store');
+
+    // Verify Email
+    Route::get('verify/{email}/{token}', [VerifyController::class, 'verify'])
+        ->name('verify');
 
     // Login
     Route::get('login', [LoginController::class, 'view'])

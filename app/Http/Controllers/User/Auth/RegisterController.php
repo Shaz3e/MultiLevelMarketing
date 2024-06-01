@@ -23,6 +23,7 @@ class RegisterController extends Controller
         $user = new User();
         $user->name = $validated['name'];
         $user->email = $validated['email'];
+        $user->remember_token = bin2hex(random_bytes(32));
         $user->password = Hash::make($validated['password']);
         $user->save();
 

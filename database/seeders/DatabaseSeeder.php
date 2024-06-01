@@ -30,10 +30,11 @@ class DatabaseSeeder extends Seeder
             TodoLabelSeeder::class,
 
             // Local,
-            CompanySeeder::class,
-            DepartmentSeeder::class,
-            UserSeeder::class,
-            KnowledgebaseCategorySeeder::class,
+            // CompanySeeder::class,
+            // DepartmentSeeder::class,
+            // UserSeeder::class,
+            // KnowledgebaseCategorySeeder::class,
+            RankingSeeder::class,
             CurrencySeeder::class,
 
             AppSettingSeeder::class,

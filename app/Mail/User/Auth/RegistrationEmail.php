@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Mail\User;
+namespace App\Mail\User\Auth;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Str;
 
-class SendUserRegistrationEmail extends Mailable
+class RegistrationEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,7 +19,7 @@ class SendUserRegistrationEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($user)
+    public function __construct(User $user)
     {
         $this->user = $user;
     }
@@ -30,7 +30,7 @@ class SendUserRegistrationEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send User Registration Email',
+            subject: 'Activate your account',
         );
     }
 
@@ -39,17 +39,15 @@ class SendUserRegistrationEmail extends Mailable
      */
     public function content(): Content
     {
-        $token = Str::random(64);
-        $this->user->update([
-            'remember_token' => $token
-        ]);
-
         return new Content(
-            markdown: 'emails.user.send-user-registration-email',
+            markdown: 'emails.user.auth.registration-email',
             with: [
                 'user' => $this->user,
-                'url' => config('app.url') . '/login?token=' . $token,
-            ],
+                'url' => route('verify',[
+                    'email' => $this->user->email,
+                    'token' => $this->user->getRememberToken()
+                ]),
+            ]
         );
     }
 

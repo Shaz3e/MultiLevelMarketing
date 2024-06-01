@@ -80,6 +80,14 @@ class User extends Authenticatable implements Auditable
         return $this->hasMany(SupportTicket::class);
     }
 
+    /**
+     * Wallet
+     */
+    public function wallet()
+    {
+        return $this->hasOne(UserWallet::class);
+    }
+
     public function pincodes()
     {
         return $this->hasMany(PinCode::class, 'user_id');

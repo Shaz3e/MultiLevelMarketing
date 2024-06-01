@@ -22,7 +22,31 @@
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
+                {{-- /.col --}}
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="gst">GST %</label>
+                        <input type="number" name="gst" id="gst" class="form-control" min="0" max="100"
+                            value="{{ old('gst', DiligentCreators('gst')) }}" required>
+                    </div>
+                    @error('gst')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                {{-- /.col --}}
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="default_price">Default Price</label>
+                        <input type="number" name="default_price" id="default_price" class="form-control" min="0" max="100000000"
+                            value="{{ old('default_price', DiligentCreators('default_price')) }}" required>
+                    </div>
+                    @error('default_price')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                {{-- /.col --}}
             </div>
+            {{-- /.row --}}
         </div>
         {{-- /.card-body --}}
         <div class="card-footer">

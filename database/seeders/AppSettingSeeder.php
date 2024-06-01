@@ -72,6 +72,8 @@ class AppSettingSeeder extends Seeder
 
             // Currency Setting
             ['name' => 'currency', 'value' => 1],
+            ['name' => 'gst', 'value' => 16],
+            ['name' => 'default_price', 'value' => 13],
         ];
 
         DB::table('app_settings')->insert($appSettings);

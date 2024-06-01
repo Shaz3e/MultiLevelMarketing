@@ -23,15 +23,22 @@ class CurrencySettingController extends Controller
         // Check authorize
         Gate::authorize('currencyStore', AppSetting::class);
 
-        $validated = $request->validate([
-            'currency_id' => 'required|exists:currencies,id'
-        ]);
+        $rules = [
+            'currency_id' => 'required|exists:currencies,id',
+            'gst' => 'required|gte:0|lte:100',
+            'default_price' => 'required|gte:0|lte:100000000',
+        ];
 
-        // Update or create the setting in the database
-        AppSetting::updateOrCreate(
-            ['name' => 'currency'],
-            ['value' => $validated['currency_id']]
-        );
+        // Validate the request data based on the rules
+        $validated = $request->validate($rules);
+
+        // Loop through each validated field and update or create the settings
+        foreach ($validated as $key => $value) {
+            AppSetting::updateOrCreate(
+                ['name' => $key],
+                ['value' => $value]
+            );
+        }
 
         return back()->with('success', 'Setting Saved');
     }

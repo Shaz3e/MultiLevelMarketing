@@ -50,9 +50,11 @@ class UserController extends Controller
 
         // Validate data
         $validated = $request->validated();
+        $validated['remember_token'] = bin2hex(random_bytes(32));
 
         // Update record in database
         $user = User::create($validated);
+        
 
         session()->flash('success', 'User created successfully!');
 

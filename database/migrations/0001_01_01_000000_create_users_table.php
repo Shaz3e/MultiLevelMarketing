@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('is_phone_verified')->default(false);
             $table->string('is_kyc_verified')->default(false);
             $table->boolean('is_active')->default(false);
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
         });

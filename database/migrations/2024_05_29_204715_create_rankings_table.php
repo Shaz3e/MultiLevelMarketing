@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('reward')->nullable();
             $table->string('reward_image')->nullable();
             $table->decimal('bonus_point', 7, 0)->nullable();
-            $table->string('is_active')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });
