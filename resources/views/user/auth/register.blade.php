@@ -64,13 +64,6 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="col-12 mb-2">
-                            <input type="text" name="pin_code" class="form-control"
-                                placeholder="Pin Code" required>
-                            @error('pin_code')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
 
                         <div class="col-12 mb-2">
                             <button type="submit" class="btn btn-primary">

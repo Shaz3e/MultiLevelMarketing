@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table">>
+                        <table class="table">
                             <tr>
                                 <td>Full Name</td>
                                 <td>{{ $user->name }}</td>
@@ -46,11 +46,6 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Pin Code</td>
-                                <td>{{ $user->pin_code }}</td>
-                            </tr>
-
-                            <tr>
                                 <td>Phone</td>
                                 <td>{{ $user->phone }}</td>
                             </tr>
@@ -58,7 +53,7 @@
                                 <td>Address</td>
                                 <td>{{ $user->address }}</td>
                             </tr>
-                            {{-- <tr>
+                            <tr>
                                 <td>Country</td>
                                 <td>{{ $user->country }}</td>
                             </tr>
@@ -68,7 +63,7 @@
                             <tr>
                                 <td>City</td>
                                 <td>{{ $user->city }}</td>
-                            </tr> --}}
+                            </tr>
                             <tr>
                                 <td>Zip Code</td>
                                 <td>{{ $user->zip_code }}</td>

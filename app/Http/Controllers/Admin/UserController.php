@@ -4,15 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\StoreUserRequest;
-use App\Jobs\User\SendUserRegistrationEmailJob;
 use App\Mail\Admin\User\PasswordReset;
-use App\Models\Admin;
 use App\Models\Company;
 use App\Models\PinCode;
 use App\Models\User;
 use App\Trait\Admin\FormHelper;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use OwenIt\Auditing\Models\Audit;
@@ -56,14 +53,6 @@ class UserController extends Controller
 
         // Update record in database
         $user = User::create($validated);
-
-        // if pin_code set change status pin_code
-        if ($request->filled('pin_code')) {
-            $pinCode = PinCode::where('pin_code', $request->pin_code)->first();
-            $pinCode->is_used = 1;
-            $pinCode->used_by = $pinCode->id;
-            $pinCode->save();
-        }
 
         session()->flash('success', 'User created successfully!');
 

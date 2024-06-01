@@ -35,9 +35,9 @@ class StoreUserRequest extends BaseFormRequest
             ],
             'phone' => ['nullable', 'max:30'],
             'address' => ['nullable', 'max:255'],
-            // 'country' => ['nullable', 'max:100'],
-            // 'state' => ['nullable', 'max:100'],
-            // 'city' => ['nullable', 'max:100'],
+            'country' => ['nullable', 'max:100'],
+            'state' => ['nullable', 'max:100'],
+            'city' => ['nullable', 'max:100'],
             'zip_code' => [
                 'nullable', 'max:10'
             ],

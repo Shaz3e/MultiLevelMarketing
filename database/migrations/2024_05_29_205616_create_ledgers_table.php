@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('pin')->nullable()->unique();
+            $table->foreign('pin')->references('id')->on('pin_codes')->onDelete('cascade');
             $table->string('transaction_number')->unique();
             $table->foreignId('payment_method_id');
             $table->foreign('payment_method_id')->references('id')->on('payment_methods')->onDelete('cascade');

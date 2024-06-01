@@ -11,7 +11,6 @@ class Referral extends Model
 
     protected $fillable = [
         'referrer_id',
-        'pin_code',
         'used_by_id',
     ];
 }

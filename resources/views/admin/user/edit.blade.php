@@ -45,7 +45,7 @@
                                 <div class="form-group">
                                     <label for="password">New Password</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" name="password" id="password"
+                                        <input type="text" class="form-control" name="password" id="password"
                                             value="{{ old('password') }}" minlength="8" maxlength="64" />
                                         <div class="input-group-append">
                                             <button type="button" id="generatePasswordBtn"
@@ -54,22 +54,6 @@
                                     </div>
                                 </div>
                                 @error('password')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            {{-- /.col --}}
-                            <div class="col-md-3 col-sm-12 mb-3">
-                                <div class="form-group">
-                                    <label for="pin_code">Pin Code</label>
-                                    <div class="input-group">
-                                        <input type="text" id="pin_code" name="pin_code" class="form-control"
-                                            placeholder="Check Pin" aria-label="Check Pin" aria-describedby="check_pin"
-                                            value="{{ old('pin_code', $user->pin_code) }}">
-                                        <button class="btn btn-outline-primary" type="button" id="check_pin">Check</button>
-                                    </div>
-                                    <span id="pinStatus"></span>
-                                </div>
-                                @error('pin_code')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -103,7 +87,7 @@
                                 @enderror
                             </div>
                             {{-- /.col --}}
-                            <div class="col-md-3 col-sm-12 mb-3">
+                            <div class="col-md-9 col-sm-12 mb-3">
                                 <div class="form-group">
                                     <label for="address">Address</label>
                                     <input type="text" name="address" id="address" class="form-control"
@@ -114,7 +98,7 @@
                                 @enderror
                             </div>
                             {{-- /.col --}}
-                            {{-- <div class="col-md-3 col-sm-12 mb-3">
+                            <div class="col-md-3 col-sm-12 mb-3">
                                 <div class="form-group">
                                     <label for="country">Country</label>
                                     <input type="text" name="country" id="country" class="form-control"
@@ -123,9 +107,9 @@
                                 @error('country')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
-                            </div> --}}
+                            </div>
                             {{-- /.col --}}
-                            {{-- <div class="col-md-3 col-sm-12 mb-3">
+                            <div class="col-md-3 col-sm-12 mb-3">
                                 <div class="form-group">
                                     <label for="state">State</label>
                                     <input type="text" name="state" id="state" class="form-control"
@@ -134,9 +118,9 @@
                                 @error('state')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
-                            </div> --}}
+                            </div>
                             {{-- /.col --}}
-                            {{-- <div class="col-md-3 col-sm-12 mb-3">
+                            <div class="col-md-3 col-sm-12 mb-3">
                                 <div class="form-group">
                                     <label for="city">City</label>
                                     <input type="text" name="city" id="city" class="form-control"
@@ -145,7 +129,7 @@
                                 @error('city')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
-                            </div> --}}
+                            </div>
                             {{-- /.col --}}
                             <div class="col-md-3 col-sm-12 mb-3">
                                 <div class="form-group">
@@ -266,30 +250,6 @@
                     }
                 },
                 minimumInputLength: 3
-            });
-
-            // Check Pin Code via Ajax
-            $('#check_pin').on('click', function(e) {
-                e.preventDefault();
-                let pinCode = $('#pin_code').val();
-                $.ajax({
-                    url: `{{ route('admin.check-pin') }}`,
-                    type: 'GET',
-                    data: {
-                        pin_code: pinCode
-                    },
-                    success: function(result) {
-                        // Update success message #pinStatus
-                        // $('#pinStatus').html(result.message);
-                        if (result.success) {
-                            $('#pinStatus').html('<span style="color: green;">' + result
-                                .message + '</span>');
-                        } else {
-                            $('#pinStatus').html('<span style="color: red;">' + result.message +
-                                '</span>');
-                        }
-                    }
-                });
             });
 
 

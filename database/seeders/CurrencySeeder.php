@@ -15,8 +15,8 @@ class CurrencySeeder extends Seeder
     {
         $currencies = [
             [
-                'name' => 'PKR',
-                'symbol' => 'Rs.',
+                'name' => 'EUR',
+                'symbol' => '€',
                 'is_active' => true,
             ],
         ];

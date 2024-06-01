@@ -80,4 +80,9 @@ class Ledger extends Model
     {
         return $this->belongsTo(Admin::class, 'created_by');
     }
+
+    public function pinCode()
+    {
+        return $this->belongsTo(PinCode::class, 'pin');
+    }
 }
