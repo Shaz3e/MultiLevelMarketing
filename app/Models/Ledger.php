@@ -83,6 +83,6 @@ class Ledger extends Model
 
     public function pinCode()
     {
-        return $this->belongsTo(PinCode::class, 'pin');
+        return $this->belongsTo(PinCode::class, 'pin_code');
     }
 }
