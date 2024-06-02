@@ -72,9 +72,14 @@ Route::middleware('auth')->group(function () {
     // Profile
     Route::get('my-profile', [ProfileController::class, 'profile'])
         ->name('profile');
+
     // Profile Kyc
     Route::get('my-profile/kyc', [ProfileController::class, 'kyc'])
         ->name('profile.kyc');
+        
+    // My Wallet
+    Route::get('my-profile/payout', [ProfileController::class, 'payoutWallet'])
+        ->name('profile.payout');
 
     // Profile Store
     Route::post('my-profile', [ProfileController::class, 'profileStore'])

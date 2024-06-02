@@ -44,9 +44,6 @@
                 </div>
                 {{-- /.card-body --}}
                 <div class="card-footer">
-                    {{-- <button type="submit" name="updatePassword" class="btn btn-success waves-effect waves-light">
-                        <i class="ri-save-line align-middle me-2"></i> Change Password
-                    </button> --}}
                     <x-form.button name="updatePassword" text="Change Password" icon="ri-save-line" />
                 </div>
             </form>

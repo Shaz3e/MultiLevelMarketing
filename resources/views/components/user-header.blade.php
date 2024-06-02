@@ -160,7 +160,7 @@
                     <img class="rounded-circle header-profile-user"
                         src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('storage/avatars/avatar.png') }}"
                         alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1">{{ auth()->user()->name }}</span>
+                    <span class="d-none d-xl-inline-block ms-1">{{ ucwords(auth()->user()->name) }}</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
@@ -170,9 +170,12 @@
                         Profile</a>
                     @if (!auth()->user()->is_kyc_verified)
                         <a class="dropdown-item" href="{{ route('profile.kyc') }}"><i
-                                class="ri-user-line align-middle me-1"></i>
+                                class="ri-profile-line align-middle me-1"></i>
                             My KYC</a>
                     @endif
+                    <a class="dropdown-item" href="{{ route('profile.payout') }}"><i
+                            class="ri-wallet-line align-middle me-1"></i>
+                        My Wallet</a>
                     <div class="dropdown-divider"></div>
                     <a href="javascript:void(0)" class="dropdown-item text-danger"
                         onclick="$('#logout-form').submit();">

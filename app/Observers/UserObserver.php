@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Mail\User\Auth\RegistrationEmail;
 use App\Models\User;
 use App\Models\UserKyc;
+use App\Models\UserPayoutWallet;
 use App\Models\UserWallet;
 use Illuminate\Support\Facades\Mail;
 
@@ -24,6 +25,11 @@ class UserObserver
 
         // Create User Kyc
         $UserKyc = UserKyc::create([
+            'user_id' => $user->id
+        ]);
+
+        // Create User Payout Wallet
+        $userPayoutWallet = UserPayoutWallet::create([
             'user_id' => $user->id
         ]);
 

@@ -33,6 +33,7 @@ class DashboardController extends Controller
         $progress = ($userPoints / $nextRanking->bonus_point) * 100;
 
         return view('user.dashboard', [
+            'user' => $user,
             'promotions' => $promotions,
             'progress' => $progress,
             'userPoints' => $userPoints,

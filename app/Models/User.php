@@ -93,7 +93,15 @@ class User extends Authenticatable implements Auditable
      */
     public function wallet()
     {
-        return $this->hasOne(UserWallet::class);
+        return $this->hasMany(UserWallet::class);
+    }
+
+    /**
+     * User Payout Wallet
+     */
+    public function payout()
+    {
+        return $this->hasOne(UserPayoutWallet::class);
     }
 
     public function pincodes()

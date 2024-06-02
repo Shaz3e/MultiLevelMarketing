@@ -148,7 +148,7 @@
                                     <select name="is_email_verified" id="is_email_verified" class="form-control"
                                         value="{{ old('is_email_verified') }}" required>
                                         <option value="1" {{ old('is_email_verified', $user->is_email_verified) == 1 ? 'selected' : '' }}>Yes</option>
-                                        <option value="0" {{ old('is_email_verified', $user->is_email_verified) == 0 ? 'selected' : '' }} selected>No</option>
+                                        <option value="0" {{ old('is_email_verified', $user->is_email_verified) == 0 ? 'selected' : '' }}>No</option>
                                     </select>
                                 </div>
                                 @error('is_email_verified')
@@ -162,7 +162,7 @@
                                     <select name="is_phone_verified" id="is_phone_verified" class="form-control"
                                         value="{{ old('is_phone_verified') }}" required>
                                         <option value="1" {{ old('is_phone_verified', $user->is_phone_verified) == 1 ? 'selected' : '' }}>Yes</option>
-                                        <option value="0" {{ old('is_phone_verified', $user->is_phone_verified) == 1 ? 'selected' : '' }} selected>No</option>
+                                        <option value="0" {{ old('is_phone_verified', $user->is_phone_verified) == 0 ? 'selected' : '' }}>No</option>
                                     </select>
                                 </div>
                                 @error('is_phone_verified')
@@ -176,7 +176,7 @@
                                     <select name="is_kyc_verified" id="is_kyc_verified" class="form-control"
                                         value="{{ old('is_kyc_verified') }}" required>
                                         <option value="1" {{ old('is_kyc_verified', $user->is_kyc_verified) == 1 ? 'selected' : '' }}>Yes</option>
-                                        <option value="0" {{ old('is_kyc_verified', $user->is_kyc_verified) == 1 ? 'selected' : '' }} selected>No</option>
+                                        <option value="0" {{ old('is_kyc_verified', $user->is_kyc_verified) == 0 ? 'selected' : '' }}>No</option>
                                     </select>
                                 </div>
                                 @error('is_kyc_verified')
@@ -190,7 +190,7 @@
                                     <select name="is_active" id="is_active" class="form-control"
                                         value="{{ old('is_active') }}" required>
                                         <option value="1" {{ old('is_active', $user->is_active) == 1 ? 'selected' : '' }}>Yes</option>
-                                        <option value="0" {{ old('is_active', $user->is_active) == 1 ? 'selected' : '' }} selected>No</option>
+                                        <option value="0" {{ old('is_active', $user->is_active) == 0 ? 'selected' : '' }}>No</option>
                                     </select>
                                 </div>
                                 @error('is_active')

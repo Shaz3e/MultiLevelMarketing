@@ -1,6 +1,6 @@
 <div class="row">
-    <div class="col-12">
-        <div class="card">
+    <div class="col-9">
+        <div class="card" style="height: calc(100% - 30px)">
             <div class="card-body">
                 <div class="progress animated-progess mb-2">
                     <div class="progress-bar bg-primary" role="progressbar" style="width: {{ $progress }}%"
@@ -9,10 +9,10 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <p>
-                            <span class="d-block">Current Points: 
+                            <span class="d-block">Current Points:
                                 <strong class="badge bg-success">{{ $userPoints }}</strong>
                             </span>
-                            <span class="d-block">Remaining Points: 
+                            <span class="d-block">Remaining Points:
                                 <strong class="badge bg-danger">{{ $nextRanking->bonus_point - $userPoints }}</strong>
                             </span>
                         </p>
@@ -31,6 +31,25 @@
                 {{-- /.row --}}
             </div>
             {{-- /.card-body --}}
+        </div>
+        {{-- /.card --}}
+    </div>
+    {{-- /.col --}}
+    <div class="col-3">
+        <div class="card" style="height: calc(100% - 30px)">
+            <div class="card-body">
+                <small>Total Amount:</small>
+                <strong class="d-block">
+                    {{ currency(DiligentCreators('currency'), ['symbol'])['symbol'] }}
+                    {{ currencyFormat($user->wallet->sum('amount')) }}
+                    {{ currency(DiligentCreators('currency'), ['name'])['name'] }}
+                </strong>
+                <small>Total Commission: (test)</small>
+                <strong class="d-block">
+                    {{ currency(DiligentCreators('currency'), ['symbol'])['symbol'] }}
+                    {{ currencyFormat($user->wallet->sum('amount')) }}
+                </strong>
+            </div>
         </div>
         {{-- /.card --}}
     </div>

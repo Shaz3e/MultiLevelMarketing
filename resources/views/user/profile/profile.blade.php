@@ -8,10 +8,10 @@
             ['text' => 'My Profile', 'link' => null],
         ],
     ])
-    
+
     {{-- My details --}}
     @include('user.profile.information')
-    
+
     {{-- Change Avatar --}}
     @include('user.profile.avatar')
 
