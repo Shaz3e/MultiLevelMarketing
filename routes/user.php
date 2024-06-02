@@ -72,6 +72,11 @@ Route::middleware('auth')->group(function () {
     // Profile
     Route::get('my-profile', [ProfileController::class, 'profile'])
         ->name('profile');
+    // Profile Kyc
+    Route::get('my-profile/kyc', [ProfileController::class, 'kyc'])
+        ->name('profile.kyc');
+
+    // Profile Store
     Route::post('my-profile', [ProfileController::class, 'profileStore'])
         ->name('profile.store');
 

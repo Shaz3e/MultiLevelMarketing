@@ -43,6 +43,7 @@ use App\Http\Controllers\Admin\TaskLabelController;
 
 // Users
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserKycController;
 
 // Companies
 use App\Http\Controllers\Admin\CompanyController;
@@ -213,7 +214,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('search.payment-methods');
 
         // Ledger
-        Route::prefix('ledger')->name('ledger.')->group(function(){
+        Route::prefix('ledger')->name('ledger.')->group(function () {
             Route::resource('deposits', LedgerDepositController::class);
             Route::resource('withdraws', LedgerWithdrawController::class);
         });
@@ -263,6 +264,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('users.audit');
         Route::get('users-audit/delete/{id}', [UserController::class, 'deleteAudit'])
             ->name('users.audit.delete');
+
+        /**
+         * User KYC
+         */
+        Route::get('user-kyc', [UserKycController::class, 'index'])
+            ->name('user.kyc');
 
         /**
          * Companies

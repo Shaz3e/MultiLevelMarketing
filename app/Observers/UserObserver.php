@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Mail\User\Auth\RegistrationEmail;
 use App\Models\User;
+use App\Models\UserKyc;
 use App\Models\UserWallet;
 use Illuminate\Support\Facades\Mail;
 
@@ -19,6 +20,11 @@ class UserObserver
             'user_id' => $user->id,
             'amount' => DiligentCreators('default_price'),
             'points' => 25,
+        ]);
+
+        // Create User Kyc
+        $UserKyc = UserKyc::create([
+            'user_id' => $user->id
         ]);
 
         // Send Registration Email

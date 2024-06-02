@@ -138,6 +138,14 @@
                                                 </a>
                                             </li>
                                         @endcan
+                                        @can('user.list')
+                                            <li class="{{ request()->routeIs('admin.user.kyc') ? 'mm-active' : '' }}">
+                                                <a href="{{ route('admin.user.kyc') }}"
+                                                    class="{{ request()->routeIs('admin.user.kyc') ? 'active' : '' }}">
+                                                    User KYC
+                                                </a>
+                                            </li>
+                                        @endcan
                                         @can('company.list')
                                             <li class="{{ request()->routeIs('admin.companies.*') ? 'mm-active' : '' }}">
                                                 <a href="{{ route('admin.companies.index') }}"

@@ -168,6 +168,11 @@
                     <a class="dropdown-item" href="{{ route('profile') }}"><i
                             class="ri-user-line align-middle me-1"></i>
                         Profile</a>
+                    @if (!auth()->user()->is_kyc_verified)
+                        <a class="dropdown-item" href="{{ route('profile.kyc') }}"><i
+                                class="ri-user-line align-middle me-1"></i>
+                            My KYC</a>
+                    @endif
                     <div class="dropdown-divider"></div>
                     <a href="javascript:void(0)" class="dropdown-item text-danger"
                         onclick="$('#logout-form').submit();">

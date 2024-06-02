@@ -81,6 +81,14 @@ class User extends Authenticatable implements Auditable
     }
 
     /**
+     * User KYC
+     */
+    public function userKyc()
+    {
+        return $this->hasOne(UserKyc::class);
+    }
+
+    /**
      * Wallet
      */
     public function wallet()

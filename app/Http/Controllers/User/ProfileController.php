@@ -16,6 +16,14 @@ class ProfileController extends Controller
             'user' => $user,
         ]);
     }
+    public function kyc()
+    {
+        $user = Auth::user();
+
+        return view('user.profile.kyc', [
+            'user' => $user,
+        ]);
+    }
 
     /**
      * Update profile
@@ -35,6 +43,10 @@ class ProfileController extends Controller
 
         if ($request->has('updateProfile')) {
             return $this->updateProfile($request);
+        }
+
+        if ($request->has('updateKyc')) {
+            return $this->updateKyc($request);
         }
     }
 
@@ -116,7 +128,6 @@ class ProfileController extends Controller
             $validated['avatar'] = $request->file('avatar')
                 ->storeAs('avatars', $filename, 'public');
             $user->avatar = $validated['avatar'];
-            
         } elseif ($request->filled('selected_avatar')) {
             // If no file is uploaded, use the selected avatar path
             $user->avatar = $request->input('selected_avatar');
@@ -131,7 +142,6 @@ class ProfileController extends Controller
         // Redirect back to the previous page
         return back();
     }
-
 
     /**
      * validatePassword
@@ -152,5 +162,44 @@ class ProfileController extends Controller
         }
 
         return $request->validate($rules);
+    }
+
+    /**
+     * updateKyc
+     */
+    public function updateKyc(Request $request)
+    {
+        // Validated
+        $validated = $request->validate([
+            'id_number' => 'required|numeric|max_digits:50',
+            'id_proof_front' => 'required|mimes:jpeg,png|max:2048',
+            'id_proof_back' => 'required|mimes:jpeg,png|max:2048',
+            'address_proof' => 'required|mimes:jpeg,png|max:2048',
+        ]);
+
+        // Get current user
+        $user = Auth::user();
+
+        // Upload ID Proof Front
+        $id_proof_front = time() . '-id-proof-front' . $request->file('id_proof_front')->extension();
+        $validated['id_proof_front'] = $request->file('id_proof_front')
+            ->storeAs('user-kyc', $id_proof_front, 'public');
+
+        // Upload ID Proof Back
+        $id_proof_back = time() . '-id-proof-back' . $request->file('id_proof_back')->extension();
+        $validated['id_proof_back'] = $request->file('id_proof_back')
+            ->storeAs('user-kyc', $id_proof_back, 'public');
+
+        // Upload Address Proof
+        $address_proof = time() . '-address-proof' . $request->file('address_proof')->extension();
+        $validated['address_proof'] = $request->file('address_proof')
+            ->storeAs('user-kyc', $address_proof, 'public');
+
+        // Update KYC
+        $user->userKyc->update($validated);
+
+        session()->flash('success', 'KYC updated successfully!');
+
+        return back();
     }
 }
