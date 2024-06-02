@@ -67,8 +67,23 @@
 
                     </div>
                 </form>
+                @env('local')
+                <div class="row mx-5">
+                    <div class="col-md-12">
+                        <div class="d-grid">
+                            <div class="mb-2">
+                                <x-login-link label="Login as User" email="user@shaz3e.com"
+                                    class="btn btn-success btn-block btn-sm waves-effect waves-light"
+                                    redirect-url="{{ route('dashboard') }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- /.row --}}
+                @endenv
             </div>
             {{-- /.container --}}
+
         </div>
         {{-- /.s3-authbox --}}
     </div>

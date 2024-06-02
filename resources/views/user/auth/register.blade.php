@@ -45,8 +45,8 @@
                             @enderror
                         </div>
                         <div class="col-12 mb-2">
-                            <input class="form-control input-mask" name="email" data-inputmask="'alias':'email'" placeholder="Email"
-                                value="{{ old('email') }}" required>
+                            <input class="form-control input-mask" name="email" data-inputmask="'alias':'email'"
+                                placeholder="Email" value="{{ old('email') }}" required>
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -61,6 +61,14 @@
                             <input type="password" name="confirm_password" class="form-control"
                                 placeholder="Confirm Password" required>
                             @error('confirm_password')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-6 mb-2">
+                            <input type="text" name="referral_code" class="form-control" placeholder="Referral Code"
+                                value="{{ old('referral_code', request()->has('referral_code')) }}">
+                            @error('referral_code')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -86,26 +94,28 @@
 
 @push('styles')
 
-@if (!is_null(DiligentCreators('register_page_heading_color')) || !is_null(DiligentCreators('register_page_heading_bg_color')))
-<style>
-    .page-heading {
-        padding: 5px 10px;
-        display: inline-block;
-        color: {{ DiligentCreators('register_page_heading_color') }};
-        background-color: {{ DiligentCreators('register_page_heading_bg_color') }};
-    }
-</style>
-@endif
-@if (!is_null(DiligentCreators('register_page_text_color')) || !is_null(DiligentCreators('register_page_text_bg_color')))
-<style>
-    .page-text {
-        padding: 5px 10px;
-        display: inline-block;
-        color: {{ DiligentCreators('register_page_text_color') }};
-        background-color: {{ DiligentCreators('register_page_text_bg_color') }};
-    }
-</style>
-@endif
+    @if (
+        !is_null(DiligentCreators('register_page_heading_color')) ||
+            !is_null(DiligentCreators('register_page_heading_bg_color')))
+        <style>
+            .page-heading {
+                padding: 5px 10px;
+                display: inline-block;
+                color: {{ DiligentCreators('register_page_heading_color') }};
+                background-color: {{ DiligentCreators('register_page_heading_bg_color') }};
+            }
+        </style>
+    @endif
+    @if (!is_null(DiligentCreators('register_page_text_color')) || !is_null(DiligentCreators('register_page_text_bg_color')))
+        <style>
+            .page-text {
+                padding: 5px 10px;
+                display: inline-block;
+                color: {{ DiligentCreators('register_page_text_color') }};
+                background-color: {{ DiligentCreators('register_page_text_bg_color') }};
+            }
+        </style>
+    @endif
     @if (!is_null(DiligentCreators('register_page_image')))
         <style>
             .s3-page {
