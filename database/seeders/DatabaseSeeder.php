@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             // Local,
             // CompanySeeder::class,
             // DepartmentSeeder::class,
-            // UserSeeder::class,
+            UserSeeder::class,
             // KnowledgebaseCategorySeeder::class,
             RankingSeeder::class,
             CurrencySeeder::class,

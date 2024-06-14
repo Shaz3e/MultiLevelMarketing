@@ -72,7 +72,7 @@
                     <div class="col-md-12">
                         <div class="d-grid">
                             <div class="mb-2">
-                                <x-login-link label="Login as User" email="user@shaz3e.com"
+                                <x-login-link label="Login as User" key="1"
                                     class="btn btn-success btn-block btn-sm waves-effect waves-light"
                                     redirect-url="{{ route('dashboard') }}" />
                             </div>

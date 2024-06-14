@@ -19,7 +19,7 @@ class User extends Authenticatable implements Auditable
      *
      * @var array<int, string>
      */
-    protected $fillable = [        
+    protected $fillable = [
         'company_id',
         'name',
         'email',
@@ -104,10 +104,33 @@ class User extends Authenticatable implements Auditable
         return $this->hasOne(UserPayoutWallet::class);
     }
 
+    /**
+     * Pincode relationship
+     */
     public function pincodes()
     {
         return $this->hasMany(PinCode::class, 'user_id');
     }
+
+    /**
+     * Referral Tree
+     */
+    public function referralTree()
+    {
+        return $this->hasOne(ReferralTree::class, 'user_id');
+    }
+    
+    /**
+     * A user can be a parent of many other users
+     */
+    public function parent()
+    {
+        return $this->hasMany(ReferralTree::class, 'parent_id');
+    }
+
+    /**
+     * Parent's childs
+     */
 
     protected function setAuditInclude()
     {

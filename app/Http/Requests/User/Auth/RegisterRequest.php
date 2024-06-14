@@ -35,6 +35,10 @@ class RegisterRequest extends BaseFormRequest
                 'required',
                 'same:password',
             ],
+            'referral_code' => [
+                'nullable',
+                Rule::exists('users','id'),
+            ],
         ];
     }
 }

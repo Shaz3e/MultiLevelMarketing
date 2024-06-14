@@ -7,5 +7,8 @@
 {{-- Promotion Box --}}
 @include('user.dashboard.promotions')
 
+{{-- Referral Tree --}}
+@include('user.dashboard.referral-tree')
+
 {{-- Referral Code --}}
 @include('user.dashboard.referral-code')

@@ -13,18 +13,13 @@ return new class extends Migration
     {
         Schema::create('referral_trees', function (Blueprint $table) {
             $table->id();
-            // ID of the user who referred the user
-            $table->foreignId('referrer_id')->nullable();
-            $table->foreign('referrer_id')->references('id')->on('users')->onDelete('set null');
-            // ID of the user who used referral
-            $table->foreignId('direct_id')->nullable();
-            $table->foreign('direct_id')->references('id')->on('users')->onDelete('set null');
-            $table->foreignId('level_1')->nullable();
-            $table->foreign('level_1')->references('id')->on('users')->onDelete('set null');
-            $table->foreignId('level_2')->nullable();
-            $table->foreign('level_2')->references('id')->on('users')->onDelete('set null');
-            $table->foreignId('level_3')->nullable();
-            $table->foreign('level_3')->references('id')->on('users')->onDelete('set null');
+            $table->integer('parent_id')->nullable()->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->integer('level_1')->nullable()->constrained();
+            $table->integer('level_2')->nullable()->constrained();
+            $table->integer('level_3')->nullable()->constrained();
+            $table->integer('level_4')->nullable()->constrained();
+            
             $table->timestamps();
         });
     }

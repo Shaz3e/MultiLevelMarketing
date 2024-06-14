@@ -3,10 +3,12 @@
 namespace App\Observers;
 
 use App\Mail\User\Auth\RegistrationEmail;
+use App\Models\ReferralTree;
 use App\Models\User;
 use App\Models\UserKyc;
 use App\Models\UserPayoutWallet;
 use App\Models\UserWallet;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class UserObserver
@@ -16,26 +18,19 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        // Create Wallet
-        $wallet = UserWallet::create([
-            'user_id' => $user->id,
-            'amount' => DiligentCreators('default_price'),
-            'points' => 25,
-        ]);
-
         // Create User Kyc
-        $UserKyc = UserKyc::create([
+        UserKyc::create([
             'user_id' => $user->id
         ]);
 
         // Create User Payout Wallet
-        $userPayoutWallet = UserPayoutWallet::create([
+        UserPayoutWallet::create([
             'user_id' => $user->id
         ]);
 
         // Send Registration Email
-        Mail::to($user->email)
-            ->send(new RegistrationEmail($user));
+        // Mail::to($user->email)
+        //     ->queue(new RegistrationEmail($user));
     }
 
     /**
