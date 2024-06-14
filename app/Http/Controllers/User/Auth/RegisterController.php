@@ -22,20 +22,16 @@ class RegisterController extends Controller
         // Validate Request
         $validated = $request->validated();
 
+        $referrer = User::where('referral_code', $validated['referral_code'])->first();
+
         // Create User and Save to DB
         $user = new User();
         $user->name = $validated['name'];
         $user->email = $validated['email'];
         $user->remember_token = bin2hex(random_bytes(32));
         $user->password = Hash::make($validated['password']);
+        $user->referrer_id = $referrer ? $referrer->id : null;
         $user->save();
-
-         // Create Referral
-         $referralData = new ReferralTree();
-         $referralData->parent_id = $validated['referral_code'];         
-         $referralData->user_id = $user->id;
-         $referralData->save();
-         startLevel();
 
         // Login
         // auth()->login($user); // development

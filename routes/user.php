@@ -18,7 +18,7 @@ use App\Http\Controllers\User\ProfileController;
 
 // Pin Code
 use App\Http\Controllers\User\PinCodeController;
-
+use App\Http\Controllers\User\ReferralController;
 // Support Tickets
 use App\Http\Controllers\User\SupportTicketController;
 
@@ -68,6 +68,13 @@ Route::middleware('auth')->group(function () {
     // User Dashboard
     Route::get('/', [DashboardController::class, 'dashboard'])
         ->name('dashboard');
+
+    // Referrals
+    Route::get('referrals/direct/{id}', [ReferralController::class, 'direct'])->name('referrals.direct');
+    Route::get('referrals/level1/{id}', [ReferralController::class, 'levelOne'])->name('referrals.level1');
+    Route::get('referrals/level2/{id}', [ReferralController::class, 'levelTwo'])->name('referrals.level2');
+    Route::get('referrals/level3/{id}', [ReferralController::class, 'levelThree'])->name('referrals.level3');
+    
 
     // Profile
     Route::get('my-profile', [ProfileController::class, 'profile'])

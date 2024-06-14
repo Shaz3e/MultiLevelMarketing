@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable implements Auditable
 {
@@ -20,6 +21,8 @@ class User extends Authenticatable implements Auditable
      * @var array<int, string>
      */
     protected $fillable = [
+        'referral_code',
+        'referrer_id',
         'company_id',
         'name',
         'email',
@@ -113,24 +116,36 @@ class User extends Authenticatable implements Auditable
     }
 
     /**
-     * Referral Tree
+     * Generate random unique referral code
      */
-    public function referralTree()
+    protected static function boot()
     {
-        return $this->hasOne(ReferralTree::class, 'user_id');
-    }
-    
-    /**
-     * A user can be a parent of many other users
-     */
-    public function parent()
-    {
-        return $this->hasMany(ReferralTree::class, 'parent_id');
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->referral_code = strtoupper(Str::random(10));
+        });
+
+        static::created(function ($user) {
+            $avatars = ['avatar1.png', 'avatar2.png', 'avatar3.png', 'avatar4.png', 'avatar5.png'];
+            $user->avatar = 'avatars/' . $avatars[array_rand($avatars)];
+        });
     }
 
-    /**
-     * Parent's childs
-     */
+    public function referrer()
+    {
+        return $this->belongsTo(User::class, 'referrer_id');
+    }
+
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'referrer_id');
+    }
+
+    public function allReferrals()
+    {
+        return $this->referrals()->with('referrals.referrals');
+    }
 
     protected function setAuditInclude()
     {

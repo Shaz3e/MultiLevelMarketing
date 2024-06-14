@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="input-group">
-            <input class="form-control" value="{{ env('APP_URL') . '/register?ref=' . auth()->user()->id }}"
+            <input class="form-control" value="{{ env('APP_URL') . '/register?ref=' . auth()->user()->referral_code }}"
                 id="copyRefferalCode" disabled>
             <span class="input-group-append">
                 <button type="button" onclick="copyToClipboard()"

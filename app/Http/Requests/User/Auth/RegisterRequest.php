@@ -37,7 +37,8 @@ class RegisterRequest extends BaseFormRequest
             ],
             'referral_code' => [
                 'nullable',
-                Rule::exists('users','id'),
+                'string',
+                Rule::exists('users','referral_code'),
             ],
         ];
     }

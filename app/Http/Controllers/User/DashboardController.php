@@ -22,9 +22,7 @@ class DashboardController extends Controller
         $user = Auth::user(); // Get the logged-in user
 
         
-        $referralTree = ReferralTree::all();
-
-
+        $referralTree = User::with('referrals.referrals.referrals')->findOrFail($user->id);
 
         // $userPoints = $user->wallet->points; // Get the user's current points
         $userPoints = UserWallet::where('user_id', $user->id)
@@ -48,30 +46,30 @@ class DashboardController extends Controller
         ]);
     }
 
-    private function showTree($userId)
-    {
-        $user = User::findOrFail($userId);
-        $referralTree = ReferralTree::where('parent_id', $userId)->get();
+    // private function showTree($userId)
+    // {
+    //     $user = User::findOrFail($userId);
+    //     $referralTree = ReferralTree::where('parent_id', $userId)->get();
 
-        foreach ($referralTree as $tree) {
-            $tree->level_1 = $this->getUserWithReferralTree($tree->user_id);
-            if ($tree->level_1) {
-                $tree->level_2 = $this->getUserWithReferralTree($tree->level_1->id);
-                if ($tree->level_2) {
-                    $tree->level_3 = $this->getUserWithReferralTree($tree->level_2->id);
-                }
-            }
-        }
+    //     foreach ($referralTree as $tree) {
+    //         $tree->level_1 = $this->getUserWithReferralTree($tree->user_id);
+    //         if ($tree->level_1) {
+    //             $tree->level_2 = $this->getUserWithReferralTree($tree->level_1->id);
+    //             if ($tree->level_2) {
+    //                 $tree->level_3 = $this->getUserWithReferralTree($tree->level_2->id);
+    //             }
+    //         }
+    //     }
 
-        return $referralTree;
-    }
+    //     return $referralTree;
+    // }
 
-    private function getUserWithReferralTree($userId)
-    {
-        $user = User::find($userId);
-        if ($user) {
-            $user->referralTree = ReferralTree::where('parent_id', $userId)->first();
-        }
-        return $user;
-    }
+    // private function getUserWithReferralTree($userId)
+    // {
+    //     $user = User::find($userId);
+    //     if ($user) {
+    //         $user->referralTree = ReferralTree::where('parent_id', $userId)->first();
+    //     }
+    //     return $user;
+    // }
 }

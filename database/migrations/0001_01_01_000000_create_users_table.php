@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            
+            $table->string('referral_code')->unique()->nullable();
+            $table->unsignedBigInteger('referrer_id')->nullable();
+            $table->foreign('referrer_id')->references('id')->on('users')->onDelete('set null');
+            
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');

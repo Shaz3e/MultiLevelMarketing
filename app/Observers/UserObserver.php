@@ -29,8 +29,8 @@ class UserObserver
         ]);
 
         // Send Registration Email
-        // Mail::to($user->email)
-        //     ->queue(new RegistrationEmail($user));
+        Mail::to($user->email)
+            ->queue(new RegistrationEmail($user));
     }
 
     /**
