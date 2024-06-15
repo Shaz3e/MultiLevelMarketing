@@ -40,14 +40,13 @@
             <div class="card-body">
                 <small>Total Amount:</small>
                 <strong class="d-block">
-                    {{ currency(DiligentCreators('currency'), ['symbol'])['symbol'] }}
-                    {{ currencyFormat($user->wallet->sum('amount')) }}
-                    {{ currency(DiligentCreators('currency'), ['name'])['name'] }}
-                </strong>
-                <small>Total Commission: (test)</small>
-                <strong class="d-block">
-                    {{ currency(DiligentCreators('currency'), ['symbol'])['symbol'] }}
-                    {{ currencyFormat($user->wallet->sum('amount')) }}
+                    @if ($user->wallet)
+                        {{ currency(DiligentCreators('currency'), ['symbol'])['symbol'] }}
+                        {{ currencyFormat($user->wallet->sum('amount')) }}
+                        {{ currency(DiligentCreators('currency'), ['name'])['name'] }}
+                    @else
+                        N/A
+                    @endif
                 </strong>
             </div>
         </div>

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_wallets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->decimal('amount', 8, 2)->default(0.00);
             $table->decimal('points', 8,0)->default(0);

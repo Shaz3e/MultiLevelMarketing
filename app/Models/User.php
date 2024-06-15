@@ -96,7 +96,7 @@ class User extends Authenticatable implements Auditable
      */
     public function wallet()
     {
-        return $this->hasMany(UserWallet::class);
+        return $this->hasOne(UserWallet::class);
     }
 
     /**

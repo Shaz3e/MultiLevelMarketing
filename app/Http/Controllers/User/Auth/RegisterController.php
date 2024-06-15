@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Auth\RegisterRequest;
 use App\Models\ReferralTree;
 use App\Models\User;
+use App\Services\ReferralService;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -32,6 +33,11 @@ class RegisterController extends Controller
         $user->password = Hash::make($validated['password']);
         $user->referrer_id = $referrer ? $referrer->id : null;
         $user->save();
+
+        if ($referrer) {
+            $referralService = app(ReferralService::class);
+            $referralService->allocateRewards($user);
+        }
 
         // Login
         // auth()->login($user); // development
