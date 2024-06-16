@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cookie;
 use OwenIt\Auditing\Auditable as AuditingAuditable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Support\Str;
@@ -127,8 +128,10 @@ class User extends Authenticatable implements Auditable
         });
 
         static::created(function ($user) {
+            // Generate random avatar
             $avatars = ['avatar1.png', 'avatar2.png', 'avatar3.png', 'avatar4.png', 'avatar5.png'];
             $user->avatar = 'avatars/' . $avatars[array_rand($avatars)];
+            $user->save();
         });
     }
 

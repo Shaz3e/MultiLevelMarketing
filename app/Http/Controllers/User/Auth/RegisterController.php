@@ -4,17 +4,20 @@ namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Auth\RegisterRequest;
-use App\Models\ReferralTree;
 use App\Models\User;
 use App\Services\ReferralService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    public function view()
+    public function view(Request $request)
     {
-        // $data = ReferralTree::all();
-        // return $data;
+        if ($request->has('ref')) {
+            Cookie::queue('ref', $request->ref, 90);
+        }
+
         return view('user.auth.register');
     }
 
@@ -41,6 +44,9 @@ class RegisterController extends Controller
 
         // Login
         // auth()->login($user); // development
+
+        // Remove Cookie
+        Cookie::queue(Cookie::forget('ref'));
 
         session()->flash('success', 'Your account created successfully. Please check your email and confirm your account.');
 

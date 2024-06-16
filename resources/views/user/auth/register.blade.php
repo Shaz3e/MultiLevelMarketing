@@ -67,7 +67,7 @@
 
                         <div class="col-6 mb-2">
                             <input type="text" name="referral_code" class="form-control" placeholder="Referral Code"
-                                value="{{ old('referral_code', request()->has('referral_code')) }}">
+                                value="{{ old('referral_code', Cookie::get('ref') ?? '') }}">
                             @error('referral_code')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
