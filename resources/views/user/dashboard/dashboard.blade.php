@@ -2,7 +2,8 @@
 @include('user.dashboard.header')
 
 {{-- Ranking Box --}}
-@include('user.dashboard.ranking')
+{{-- @include('user.dashboard.ranking') --}}
+@livewire('user.dashboard.ranking')
 
 {{-- Promotion Box --}}
 @include('user.dashboard.promotions')
