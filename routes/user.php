@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function () {
         ->name('dashboard');
 
     // Referrals
+    Route::get('referrals/{id}', [ReferralController::class, 'index'])->name('referrals.index');
     Route::get('referrals/direct/{id}', [ReferralController::class, 'direct'])->name('referrals.direct');
     Route::get('referrals/level1/{id}', [ReferralController::class, 'levelOne'])->name('referrals.level1');
     Route::get('referrals/level2/{id}', [ReferralController::class, 'levelTwo'])->name('referrals.level2');

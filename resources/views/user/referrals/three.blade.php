@@ -11,7 +11,7 @@
                             <a href="{{ route('dashboard') }}">My Dashboard</a>
                         </li>
                         <li class="breadcrumb-item"><a href="">Direct Referrals</a></li>
-                        <li class="breadcrumb-item active">Level 1 Referrals</li>
+                        <li class="breadcrumb-item active">Level 3 Referrals</li>
                     </ol>
                 </div>
             </div>
@@ -31,34 +31,7 @@
                                     @if ($level2->referrals->count())
                                         @foreach ($level2->referrals as $level3)
                                             <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-                                                <a href="{{ route('referrals.level3', $level3->id) }}">
-                                                    <div class="card card-primary">
-                                                        <div class="card-body pb-0 px-0">
-                                                            <div class="px-4">
-                                                                @if ($level3->avatar)
-                                                                    <img src="{{ asset('storage/' . $level3->avatar) }}"
-                                                                        class="rounded-circle d-blok w-100 mx-auto"
-                                                                        alt="{{ $level3->name }}" />
-                                                                @else
-                                                                    <img src="{{ asset('assets/images/users/avatar-1.jpg') }}"
-                                                                        class="rounded-circle d-blok w-100 mx-auto"
-                                                                        alt="{{ $level3->name }}" />
-                                                                @endif
-                                                            </div>
-                                                            <p class="my-2 text-center">
-                                                                {{ $level3->name }}
-                                                                <br>
-                                                                <span class="badge bg-primary">User ID:
-                                                                    {{ $level3->id }}</span>
-                                                                <br>
-                                                                <span class="badge bg-success">Ref Code:
-                                                                    {{ $level3->referral_code }}</span>
-                                                            </p>
-                                                        </div>
-                                                        {{-- /.card-body --}}
-                                                    </div>
-                                                    {{-- /.card --}}
-                                                </a>
+                                                <x-referral-card :direct="$level3" />
                                             </div>
                                             {{-- /.col --}}
                                         @endforeach

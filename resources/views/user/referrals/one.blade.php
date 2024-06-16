@@ -26,32 +26,7 @@
                     @if ($direct->referrals->count())
                         @foreach ($direct->referrals as $level1)
                             <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-                                <a href="{{ route('referrals.level1', $level1->id) }}">
-                                    <div class="card card-primary">
-                                        <div class="card-body pb-0 px-0">
-                                            <div class="px-4">
-                                                @if ($level1->avatar)
-                                                    <img src="{{ asset('storage/' . $level1->avatar) }}"
-                                                        class="rounded-circle d-blok w-100 mx-auto"
-                                                        alt="{{ $level1->name }}" />
-                                                @else
-                                                    <img src="{{ asset('assets/images/users/avatar-1.jpg') }}"
-                                                        class="rounded-circle d-blok w-100 mx-auto"
-                                                        alt="{{ $level1->name }}" />
-                                                @endif
-                                            </div>
-                                            <p class="my-2 text-center">
-                                                {{ $level1->name }}
-                                                <br>
-                                                <span class="badge bg-primary">User ID: {{ $level1->id }}</span>
-                                                <br>
-                                                <span class="badge bg-success">Ref Code: {{ $level1->referral_code }}</span>
-                                            </p>
-                                        </div>
-                                        {{-- /.card-body --}}
-                                    </div>
-                                    {{-- /.card --}}
-                                </a>
+                                <x-referral-card :direct="$level1" />
                             </div>
                             {{-- /.col --}}
                         @endforeach

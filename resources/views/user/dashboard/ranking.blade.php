@@ -42,7 +42,7 @@
                 <strong class="d-block">
                     @if ($user->wallet)
                         {{ currency(DiligentCreators('currency'), ['symbol'])['symbol'] }}
-                        {{ currencyFormat($user->wallet->sum('amount')) }}
+                        {{ currencyFormat($user->wallet->amount) }}
                         {{ currency(DiligentCreators('currency'), ['name'])['name'] }}
                     @else
                         N/A

@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class ReferralController extends Controller
 {
+    public function index($userId)
+    {
+        $user = User::with('referrals.referrals.referrals')->findOrFail($userId);
+
+        return view('user.referrals.direct', ['user' => $user]);
+    }
     public function direct($userId)
     {
         $user = User::with('referrals.referrals.referrals')->findOrFail($userId);
