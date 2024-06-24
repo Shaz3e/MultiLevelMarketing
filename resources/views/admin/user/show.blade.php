@@ -22,6 +22,10 @@
                                 <td>{{ $user->name }}</td>
                             </tr>
                             <tr>
+                                <td>Referral Code</td>
+                                <td>{{ $user->referral_code }}</td>
+                            </tr>
+                            <tr>
                                 <td>Company</td>
                                 <td>
                                     @if ($user->company != null)

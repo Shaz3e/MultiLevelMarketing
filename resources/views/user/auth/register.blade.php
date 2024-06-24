@@ -67,8 +67,27 @@
 
                         <div class="col-6 mb-2">
                             <input type="text" name="referral_code" class="form-control" placeholder="Referral Code"
-                                value="{{ old('referral_code', Cookie::get('ref') ?? '') }}">
+                                value="{{ old('referral_code', $referralCode ?? '') }}">
                             @error('referral_code')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        {{-- <div class="col-6 mb-2">
+                            <input type="text" name="pin_code" class="form-control" placeholder="Pin Number"
+                                value="{{ old('pin_code') }}">
+                            @error('pin_code')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div> --}}
+
+                        <div class="col-12 mb-2">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" name="terms" id="agree">
+                                <label class="form-check-label" for="agree">
+                                    I Accept <a href="">Terms and Conditions</a>
+                                </label>
+                            </div>
+                            @error('terms')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

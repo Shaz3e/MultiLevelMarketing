@@ -40,6 +40,16 @@ class RegisterRequest extends BaseFormRequest
                 'string',
                 Rule::exists('users','referral_code'),
             ],
+            'terms' => [
+                'required'
+            ],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'terms.required' => 'Please accept our terms and conditions.',
         ];
     }
 }

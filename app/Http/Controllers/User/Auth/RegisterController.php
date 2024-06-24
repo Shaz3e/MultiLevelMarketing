@@ -14,11 +14,18 @@ class RegisterController extends Controller
 {
     public function view(Request $request)
     {
-        if ($request->has('ref')) {
-            Cookie::queue('ref', $request->ref, 90);
+        Cookie::queue('ref', $request->ref, 90);
+        // Try to get the referral code from the URL
+        $referralCode = $request->query('ref');
+
+        // If not present in the URL, try to get it from the cookie
+        if (!$referralCode) {
+            $referralCode = Cookie::get('ref');
         }
 
-        return view('user.auth.register');
+        return view('user.auth.register', [
+            'referralCode' => $referralCode,
+        ]);
     }
 
     public function post(RegisterRequest $request)

@@ -14,12 +14,8 @@
             <span class="badge bg-success">Ref Code: {{ $direct->referral_code }}</span>
             @if ($direct->wallet)
                 <span class="badge bg-info">Points: {{ $direct->wallet->points }}</span>
-                <br>
-                <span class="badge bg-info">Amount: {{ $direct->wallet->amount }}</span>
             @else
                 <span class="badge bg-danger">Points: 0</span>
-                <br>
-                <span class="badge bg-danger">Amount: 0</span>
             @endif
         </p>
     </div>
