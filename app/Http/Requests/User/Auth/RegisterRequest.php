@@ -36,9 +36,14 @@ class RegisterRequest extends BaseFormRequest
                 'same:password',
             ],
             'referral_code' => [
-                'nullable',
+                'required',
                 'string',
                 Rule::exists('users','referral_code'),
+            ],
+            'pin_code' => [
+                'required',
+                'string',
+                Rule::exists('pin_codes','pin_code'),
             ],
             'terms' => [
                 'required'

@@ -51,6 +51,10 @@ Route::middleware('guest')->group(function () {
         ->name('password.reset');
     Route::post('reset', [ResetPasswordController::class, 'post'])
         ->name('password.reset.store');
+
+    // Referral Code Get User Data via ajax
+    Route::get('get-referrer-user-data', [ReferralController::class, 'getUserData'])
+        ->name('get.referrer-user-date');
 });
 
 Route::middleware('auth')->group(function () {
@@ -75,7 +79,7 @@ Route::middleware('auth')->group(function () {
     Route::get('referrals/level1/{id}', [ReferralController::class, 'levelOne'])->name('referrals.level1');
     Route::get('referrals/level2/{id}', [ReferralController::class, 'levelTwo'])->name('referrals.level2');
     Route::get('referrals/level3/{id}', [ReferralController::class, 'levelThree'])->name('referrals.level3');
-    
+
 
     // Profile
     Route::get('my-profile', [ProfileController::class, 'profile'])
@@ -84,7 +88,7 @@ Route::middleware('auth')->group(function () {
     // Profile Kyc
     Route::get('my-profile/kyc', [ProfileController::class, 'kyc'])
         ->name('profile.kyc');
-        
+
     // My Wallet
     Route::get('my-profile/payout', [ProfileController::class, 'payoutWallet'])
         ->name('profile.payout');

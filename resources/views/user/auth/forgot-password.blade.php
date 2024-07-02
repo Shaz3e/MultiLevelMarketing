@@ -22,6 +22,20 @@
         <div class="s3-authbox">
             <div class="container">
                 <div class="row m-2">
+                    {{-- Logo --}}
+                    <div class="col-12 text-center">
+                        <a href="{{ route('dashboard') }}" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="{{ asset('storage/' . DiligentCreators('site_logo_small')) }}"
+                                    alt="{{ DiligentCreators('site_name') }}" height="100">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="{{ asset('storage/' . DiligentCreators('site_logo_dark')) }}"
+                                    alt="{{ DiligentCreators('site_name') }}" height="100">
+                            </span>
+                        </a>
+                    </div>
+                    {{-- /.col --}}
                     <div class="col-12 text-center">
                         <h2>Reset your password</h2>
                     </div>

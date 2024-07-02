@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Mail\User\Auth\RegistrationEmail;
+use App\Models\PinCode;
 use App\Models\ReferralTree;
 use App\Models\User;
 use App\Models\UserKyc;
@@ -26,6 +27,13 @@ class UserObserver
         // Create User Payout Wallet
         UserPayoutWallet::create([
             'user_id' => $user->id
+        ]);
+
+        // Update Pin
+        PinCode::where('pin_code', request()->pin_code)->update([
+            'is_used' => 1,
+            'used_by' => $user->id,
+            'used_at' => now(),
         ]);
 
         // Send Registration Email

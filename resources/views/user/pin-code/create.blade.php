@@ -23,15 +23,15 @@
                                     <label for="amount">Amount</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1-prepend">
+                                            <span class="input-group-text" id="amount-prepend">
                                                 {{ currency(DiligentCreators('currency'), ['symbol'])['symbol'] }}
                                             </span>
                                         </div>
                                         <input type="number" name="amount" id="amount" class="form-control"
                                             value="{{ old('amount') }}" placeholder="Enter Amount" aria-label="Amount"
-                                            aria-describedby="basic-addon1" required>
+                                            aria-describedby="amount" step="0.01" required>
                                         <div class="input-group-append">
-                                            <span class="input-group-text" id="basic-addon1-append">
+                                            <span class="input-group-text" id="amount-append">
                                                 {{ currency(DiligentCreators('currency'), ['name'])['name'] }}
                                             </span>
                                         </div>

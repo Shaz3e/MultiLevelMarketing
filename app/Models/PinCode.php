@@ -16,6 +16,8 @@ class PinCode extends Model
         'pin_code',
         'amount',
         'is_used',
+        'used_by',
+        'used_at',
     ];    
 
     // SoftDeletes

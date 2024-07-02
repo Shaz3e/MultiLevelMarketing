@@ -22,6 +22,20 @@
         <div class="s3-authbox">
             <div class="container">
                 <div class="row m-2">
+                    {{-- Logo --}}
+                    <div class="col-12 text-center">
+                        <a href="{{ route('dashboard') }}" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="{{ asset('storage/' . DiligentCreators('site_logo_small')) }}"
+                                    alt="{{ DiligentCreators('site_name') }}" height="100">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="{{ asset('storage/' . DiligentCreators('site_logo_dark')) }}"
+                                    alt="{{ DiligentCreators('site_name') }}" height="100">
+                            </span>
+                        </a>
+                    </div>
+                    {{-- /.col --}}
                     <div class="col-12 text-center">
                         <h2>Change your password</h2>
                     </div>
@@ -72,26 +86,26 @@
 @endsection
 
 @push('styles')
-@if (!is_null(DiligentCreators('reset_page_heading_color')) || !is_null(DiligentCreators('reset_page_heading_bg_color')))
-    <style>
-        .page-heading {
-            padding: 5px 10px;
-            display: inline-block;
-            color: {{ DiligentCreators('reset_page_heading_color') }};
-            background-color: {{ DiligentCreators('reset_page_heading_bg_color') }};
-        }
-    </style>
-@endif
-@if (!is_null(DiligentCreators('reset_page_text_color')) || !is_null(DiligentCreators('reset_page_text_bg_color')))
-    <style>
-        .page-text {
-            padding: 5px 10px;
-            display: inline-block;
-            color: {{ DiligentCreators('reset_page_text_color') }};
-            background-color: {{ DiligentCreators('reset_page_text_bg_color') }};
-        }
-    </style>
-@endif
+    @if (!is_null(DiligentCreators('reset_page_heading_color')) || !is_null(DiligentCreators('reset_page_heading_bg_color')))
+        <style>
+            .page-heading {
+                padding: 5px 10px;
+                display: inline-block;
+                color: {{ DiligentCreators('reset_page_heading_color') }};
+                background-color: {{ DiligentCreators('reset_page_heading_bg_color') }};
+            }
+        </style>
+    @endif
+    @if (!is_null(DiligentCreators('reset_page_text_color')) || !is_null(DiligentCreators('reset_page_text_bg_color')))
+        <style>
+            .page-text {
+                padding: 5px 10px;
+                display: inline-block;
+                color: {{ DiligentCreators('reset_page_text_color') }};
+                background-color: {{ DiligentCreators('reset_page_text_bg_color') }};
+            }
+        </style>
+    @endif
     @if (!is_null(DiligentCreators('reset_page_image')))
         <style>
             .s3-page {

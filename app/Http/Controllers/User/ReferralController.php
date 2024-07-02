@@ -38,4 +38,33 @@ class ReferralController extends Controller
 
         return view('user.referrals.three', ['user' => $user]);
     }
+
+
+    /**
+     * Get User by Referral Code
+     */
+    public function getUserData(Request $request)
+    {
+        // Validate the referral code
+        $request->validate([
+            'referral_code' => 'required|string|max:255',
+        ]);
+
+        // Retrieve the user with the given referral code
+        $user = User::where('referral_code', $request->referral_code)->first();
+
+        if (!$user) {
+            // Return JSON response with status and message for invalid referral code
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid Referral Code'
+            ]);
+        }
+
+        // Return user data in JSON format
+        return response()->json([
+            'status' => 'success',
+            'user' => $user
+        ]);
+    }
 }

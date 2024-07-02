@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Auth\RegisterRequest;
+use App\Models\PinCode;
 use App\Models\User;
 use App\Services\ReferralService;
 use Illuminate\Http\Request;
@@ -14,18 +15,7 @@ class RegisterController extends Controller
 {
     public function view(Request $request)
     {
-        Cookie::queue('ref', $request->ref, 90);
-        // Try to get the referral code from the URL
-        $referralCode = $request->query('ref');
-
-        // If not present in the URL, try to get it from the cookie
-        if (!$referralCode) {
-            $referralCode = Cookie::get('ref');
-        }
-
-        return view('user.auth.register', [
-            'referralCode' => $referralCode,
-        ]);
+        return view('user.auth.register');
     }
 
     public function post(RegisterRequest $request)
@@ -34,6 +24,15 @@ class RegisterController extends Controller
         $validated = $request->validated();
 
         $referrer = User::where('referral_code', $validated['referral_code'])->first();
+        $pin_code = PinCode::where([
+            'pin_code' => $validated['pin_code'],
+            'is_used' => 0
+        ])->first();
+
+        if (!$pin_code) {
+            session()->flash('error', 'Invalid Pin Code');
+            return redirect()->back();
+        }
 
         // Create User and Save to DB
         $user = new User();
