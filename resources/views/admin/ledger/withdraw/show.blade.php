@@ -19,14 +19,26 @@
                             <tr>
                                 <td>Payment Method</td>
                                 <td>
-                                    <a href="{{ route('admin.payment-methods.show', $withdraw->paymentMethod->id) }}">
-                                        {{ $withdraw->paymentMethod->name }}
-                                    </a>
+                                    @if ($withdraw->paymentMethod)
+                                        <a href="{{ route('admin.payment-methods.show', $withdraw->paymentMethod->id) }}">
+                                            {{ $withdraw->paymentMethod->name }}
+                                        </a>
+                                    @else
+                                        Pin Generation
+                                    @endif
                                 </td>
                             </tr>
                             <tr>
                                 <td>Transaction Number</td>
                                 <td>{{ $withdraw->transaction_number }}</td>
+                            </tr>
+                            <tr>
+                                <td>Pin Code</td>
+                                <td>
+                                    <a href="{{ route('admin.pins.show', $withdraw->pin_code) }}">
+                                        {{ $withdraw->pinCode->pin_code }}
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Payment Type</td>
@@ -36,14 +48,16 @@
                                 <td>Amount</td>
                                 <td>{{ currencyFormat($withdraw->withdraw) }}</td>
                             </tr>
-                            <tr>
-                                <td>User</td>
-                                <td>
-                                    <a href="{{ route('admin.users.show', $withdraw->user_id) }}">
-                                        {{ $withdraw->user->name }}
-                                    </a>
-                                </td>
-                            </tr>
+                            @if ($withdraw->user_id)
+                                <tr>
+                                    <td>User</td>
+                                    <td>
+                                        <a href="{{ route('admin.users.show', $withdraw->user_id) }}">
+                                            {{ $withdraw->user->name }}
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endif
                             <tr>
                                 <td>Status</td>
                                 <td>
@@ -58,7 +72,7 @@
                                     @if ($withdraw->created_by)
                                         {{ $withdraw->createdBy->name }}
                                     @else
-                                        User
+                                        Staff
                                     @endif
                                 </td>
                             </tr>
@@ -83,7 +97,7 @@
     {{-- /.row --}}
 
     {{-- Edit Button --}}
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-12">
             <a href="{{ route('admin.ledger.deposits.edit', $withdraw->id) }}" class="btn btn-primary btn-sm">
                 <i class="ri-pencil-line align-middle me-1"></i> Edit

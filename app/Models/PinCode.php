@@ -18,7 +18,7 @@ class PinCode extends Model
         'is_used',
         'used_by',
         'used_at',
-    ];    
+    ];
 
     // SoftDeletes
     protected $dates = ['deleted_at'];
@@ -40,5 +40,13 @@ class PinCode extends Model
     public function usedBy()
     {
         return $this->belongsTo(User::class, 'used_by');
+    }
+
+    /**
+     * Get the ledgers for the pin code.
+     */
+    public function ledgers()
+    {
+        return $this->hasMany(Ledger::class, 'pin_code');
     }
 }

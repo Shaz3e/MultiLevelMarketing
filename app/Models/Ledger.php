@@ -18,12 +18,13 @@ class Ledger extends Model
 
     protected $fillable = [
         'user_id',
+        'pin_code',
         'transaction_number',
         'payment_method_id',
         'deposit',
         'withdraw',
         'status',
-        'created_by',
+        'note',
     ];
 
     protected $dates = ['deleted_at'];
@@ -76,11 +77,9 @@ class Ledger extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function createdBy()
-    {
-        return $this->belongsTo(Admin::class, 'created_by');
-    }
-
+    /**
+     * Get the PinCode that owns the Ledger.
+     */
     public function pinCode()
     {
         return $this->belongsTo(PinCode::class, 'pin_code');

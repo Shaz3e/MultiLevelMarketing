@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Mail\User\Auth\RegistrationEmail;
+use App\Models\Ledger;
 use App\Models\PinCode;
 use App\Models\ReferralTree;
 use App\Models\User;
@@ -34,6 +35,12 @@ class UserObserver
             'is_used' => 1,
             'used_by' => $user->id,
             'used_at' => now(),
+        ]);
+
+        // Update ledger
+        $pincode = PinCode::where('pin_code', request()->pin_code)->first();
+        Ledger::where('pin_code', $pincode->id)->update([
+            'status' => Ledger::STATUS_PAID
         ]);
 
         // Send Registration Email
