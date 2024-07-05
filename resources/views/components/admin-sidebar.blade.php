@@ -60,7 +60,7 @@
                                 </li>
                             @endcan
 
-                            {{-- Ranking --}}
+                            {{-- Manager Ledger --}}
                             @can('ledger.list')
                                 <li>
                                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -78,6 +78,30 @@
                                             <a href="{{ route('admin.ledger.withdraws.index') }}"
                                                 class="{{ request()->routeIs('admin.ledger.withdraws.*') ? 'active' : '' }}">
                                                 Withdraw
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endcan
+
+                            {{-- Manager Accounts --}}
+                            @can('company-account.list')
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <i class="ri-bank-line"></i>
+                                        <span>Manage Accounts</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li class="{{ request()->routeIs('admin.company-accounts.*') ? 'mm-active' : '' }}">
+                                            <a href="{{ route('admin.company-accounts.index') }}"
+                                                class="{{ request()->routeIs('admin.company-accounts.*') ? 'active' : '' }}">
+                                                Accounts
+                                            </a>
+                                        </li>
+                                        <li class="{{ request()->routeIs('admin.company-account.transfer') ? 'mm-active' : '' }}">
+                                            <a href="{{ route('admin.company-account.transfer') }}"
+                                                class="{{ request()->routeIs('admin.company-account.transfer') ? 'active' : '' }}">
+                                                Transfer
                                             </a>
                                         </li>
                                     </ul>

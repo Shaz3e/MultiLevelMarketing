@@ -41,7 +41,7 @@
                         <table id="data" class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>Payment Method</th>
+                                    <th>Payment Method/Transaction ID</th>
                                     <th>User/Staff</th>
                                     <th>Amount</th>
                                     <th>Status</th>
@@ -55,8 +55,6 @@
                                         <td>
                                             @if ($withdraw->paymentMethod)
                                                 <strong class="d-block">{{ $withdraw->paymentMethod->name }}</strong>
-                                            @else
-                                                <strong class="d-block">Pin Generation</strong>
                                             @endif
                                             <small>{{ $withdraw->transaction_number }}</small>
                                         </td>

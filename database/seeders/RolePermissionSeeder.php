@@ -208,6 +208,15 @@ class RolePermissionSeeder extends Seeder
             ['guard_name' => 'admin', 'name' => 'knowledgebase-article.restore'],
             ['guard_name' => 'admin', 'name' => 'knowledgebase-article.force.delete'],
             
+            // Company Account
+            ['guard_name' => 'admin', 'name' => 'company-account.list'],
+            ['guard_name' => 'admin', 'name' => 'company-account.create'],
+            ['guard_name' => 'admin', 'name' => 'company-account.read'],
+            ['guard_name' => 'admin', 'name' => 'company-account.update'],
+            ['guard_name' => 'admin', 'name' => 'company-account.delete'],
+            ['guard_name' => 'admin', 'name' => 'company-account.restore'],
+            ['guard_name' => 'admin', 'name' => 'company-account.force.delete'],
+            
             // General Setting
             ['guard_name' => 'admin', 'name' => 'general-setting.list'],
             ['guard_name' => 'admin', 'name' => 'general-setting.read'],

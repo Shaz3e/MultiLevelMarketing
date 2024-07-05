@@ -31,9 +31,12 @@ use App\Http\Controllers\Admin\RankingController;
 // Payment Methods
 use App\Http\Controllers\Admin\PaymentMethodController;
 
-// Ledger / Deposit
+// Ledger - Deposit/Withdraw
 use App\Http\Controllers\Admin\LedgerDepositController;
 use App\Http\Controllers\Admin\LedgerWithdrawController;
+
+// Manage Account
+use App\Http\Controllers\Admin\CompanyAccountController;
 
 // Tasks
 use App\Http\Controllers\Admin\TaskController;
@@ -83,6 +86,7 @@ use App\Http\Controllers\Admin\AppSetting\MailSettingController;
 use App\Http\Controllers\Admin\AppSetting\CurrencySettingController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\AppSetting\SmsSettingController;
+
 // Permission
 use App\Http\Controllers\Admin\RolePermission\PermissionController;
 
@@ -218,6 +222,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('deposits', LedgerDepositController::class);
             Route::resource('withdraws', LedgerWithdrawController::class);
         });
+
+        // Mange Accounts
+        Route::resource('company-accounts', CompanyAccountController::class);
+        Route::get('company-account-transfer', [CompanyAccountController::class, 'transfer'])
+            ->name('company-account.transfer');
+        Route::post('company-account-transfer', [CompanyAccountController::class, 'transferStore'])
+            ->name('company-account.transfer.store');
 
         /**
          * Tasks

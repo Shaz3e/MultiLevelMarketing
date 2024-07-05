@@ -41,25 +41,31 @@
                         <table id="data" class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>Payment Method</th>
-                                    <th>User</th>
+                                    <th>Payment Method/Transaction ID</th>
+                                    <th>User/Staff</th>
                                     <th>Amount</th>
                                     <th>Status</th>
                                     <th>Initiated</th>
-                                    <th>Created By</th>
+                                    <th>Note</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($ledgers as $deposit)
                                     <tr wire:key="{{ $deposit->id }}">
                                         <td>
-                                            <strong class="d-block">{{ $deposit->paymentMethod->name }}</strong>
+                                            @if ($deposit->paymentMethod)
+                                                <strong class="d-block">{{ $deposit->paymentMethod->name }}</strong>
+                                            @endif
                                             <small>{{ $deposit->transaction_number }}</small>
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.users.show', $deposit->user->id) }}">
-                                                {{ $deposit->user->name }}
-                                            </a>
+                                            @if ($deposit->user_id)
+                                                <a href="{{ route('admin.users.show', $deposit->user->id) }}">
+                                                    {{ $deposit->user->name }}
+                                                </a>
+                                            @else
+                                                Staff
+                                            @endif
                                         </td>
                                         <td>
                                             {{ currency(DiligentCreators('currency'), ['symbol'])['symbol'] }}
@@ -76,11 +82,7 @@
                                                 class="d-block">{{ $deposit->created_at->format('l, F j, Y') }}</small>
                                         </td>
                                         <td>
-                                            @if ($deposit->created_by)
-                                                {{ $deposit->createdBy->name }}
-                                            @else
-                                                User
-                                            @endif
+                                            {{ $deposit->note }}
                                         </td>
 
                                         <td class="text-right">

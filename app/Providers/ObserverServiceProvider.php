@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\CompanyAccount;
 use App\Models\PinCode;
 use App\Models\SupportTicket;
 use App\Models\SupportTicketReply;
 use App\Models\User;
 use App\Models\UserWallet;
+use App\Observers\CompanyAccountObserver;
 use App\Observers\PinCodeObserver;
 use App\Observers\SupportTicketObserver;
 use App\Observers\SupportTicketReplyObserver;
@@ -38,5 +40,8 @@ class ObserverServiceProvider extends ServiceProvider
 
         // Pin Code
         PinCode::observe(PinCodeObserver::class);
+
+        // CompanyAccount
+        CompanyAccount::observe(CompanyAccountObserver::class);
     }
 }
