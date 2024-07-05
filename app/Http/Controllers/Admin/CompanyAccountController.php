@@ -183,12 +183,12 @@ class CompanyAccountController extends Controller
             return back();
         }
 
-        // Use a transaction for safe balance updates
+        // Start a transaction
         DB::transaction(function () use ($validated) {
             $fromAccount = CompanyAccount::find($validated['from_account']);
             $toAccount = CompanyAccount::find($validated['to_account']);
 
-            // Calculate current balance (ensure you include all relevant fields)
+            // Calculate current balance
             $currentBalance = $fromAccount->starting_balance + $fromAccount->total_in - $fromAccount->total_out;
 
             // Check if there is enough balance
@@ -197,35 +197,16 @@ class CompanyAccountController extends Controller
                 return back();
             }
 
-            // Decrement from the source account
-            $fromAccount->update([
-                'starting_balance' => $fromAccount->starting_balance - $validated['transfer_balance']
-            ]);
+            // Update account balances
+            $fromAccount->starting_balance -= $validated['transfer_balance'];
+            $fromAccount->save();
 
-            $user = Auth::guard('admin')->user();
-
-            Ledger::create([
-                'transaction_number' => Str::uuid(),
-                'withdraw' => $validated['transfer_balance'],
-                'status' => Ledger::STATUS_PAID,
-                'note' => "Balance transferred by " . $user->name . " from account: " . $fromAccount->name . " to account: " . $toAccount->name,
-            ]);
-
-            // Increment to the destination account
-            $toAccount->update([
-                'starting_balance' => $toAccount->starting_balance + $validated['transfer_balance']
-            ]);
-
-            Ledger::create([
-                'transaction_number' => Str::uuid(),
-                'deposit' => $validated['transfer_balance'],
-                'status' => Ledger::STATUS_PAID,
-                'note' => "Balance transferred by " . $user->name . " to account: " . $toAccount->name . " from account: " . $fromAccount->name,
-            ]);
+            $toAccount->starting_balance += $validated['transfer_balance'];
+            $toAccount->save();
         });
 
         session()->flash('success', 'Amount transferred successfully!');
-        
+
         return redirect()->route('admin.company-accounts.index');
     }
 }
