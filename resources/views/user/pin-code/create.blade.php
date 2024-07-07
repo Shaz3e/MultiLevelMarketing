@@ -28,7 +28,7 @@
                                             </span>
                                         </div>
                                         <input type="number" name="amount" id="amount" class="form-control"
-                                            value="{{ old('amount') }}" placeholder="Enter Amount" aria-label="Amount"
+                                            value="{{ old('amount', $amount) }}" placeholder="Enter Amount" aria-label="Amount"
                                             aria-describedby="amount" step="0.01" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="amount-append">

@@ -29,8 +29,14 @@ class PinCodeController extends Controller
             return $pinCode; // if the pin exists, generate a new one
         }
 
+        // Retrieve values from app_settings table
+        $defaultAmount = DiligentCreators('default_price');
+        $percentage = DiligentCreators('sst');
+        $amount = $defaultAmount * $percentage / 100 + $defaultAmount;
+
         return view('user.pin-code.create', [
-            'pinCode' => $pinCode
+            'pinCode' => $pinCode,
+            'amount' => $amount
         ]);
     }
 

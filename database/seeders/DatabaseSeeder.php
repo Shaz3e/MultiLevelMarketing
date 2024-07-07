@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             SupportTicketStatusSeeder::class,
             TaskLabelSeeder::class,
             TodoLabelSeeder::class,
+            CompanyAccountSeeder::class,
 
             // Local,
             // CompanySeeder::class,

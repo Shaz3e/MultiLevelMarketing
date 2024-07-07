@@ -33,6 +33,10 @@ class PinCodeController extends Controller
         // Check Authorize
         Gate::authorize('create', PinCode::class);
 
+        // Retrieve values from app_settings table
+        $defaultAmount = DiligentCreators('default_price');
+        $percentage = DiligentCreators('sst');
+        $amount = $defaultAmount * $percentage / 100 + $defaultAmount;
 
         $pinCode = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 9);
 
@@ -42,7 +46,8 @@ class PinCodeController extends Controller
         }
 
         return view('admin.pin-code.create', [
-            'pinCode' => $pinCode
+            'pinCode' => $pinCode,
+            'amount' => $amount
         ]);
     }
 

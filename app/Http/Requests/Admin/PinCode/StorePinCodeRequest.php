@@ -14,6 +14,16 @@ class StorePinCodeRequest extends BaseFormRequest
      */
     public function rules()
     {
+         // Retrieve values from DiligentCreators model or repository
+         $defaultPrice = DiligentCreators('default_price');
+         $sst = DiligentCreators('sst'); // Assuming 'sst' is stored as a percentage, like 5 for 5%
+ 
+         // Calculate the percentage value
+         $sstValue = ($sst / 100) * $defaultPrice;
+ 
+         // Calculate the minimum amount
+         $minAmount = $defaultPrice + $sstValue;
+
         return [
             'pin_code' => [
                 'required',
@@ -24,9 +34,21 @@ class StorePinCodeRequest extends BaseFormRequest
             'amount' => [
                 'required',
                 'numeric',
-                'min:0',
-                'max:1000000000',
+                'min:' . $minAmount,
+                'max:' . $minAmount,
             ],
+        ];
+    }
+
+    public function messages(): array
+    {
+        $defaultPrice = DiligentCreators('default_price');
+        $sst = DiligentCreators('sst');
+        $sstValue = ($sst / 100) * $defaultPrice;
+        $minAmount = $defaultPrice + $sstValue;
+
+        return [
+            'amount.min' => 'The amount must be at least ' . number_format($minAmount, 2) . '.',
         ];
     }
 }

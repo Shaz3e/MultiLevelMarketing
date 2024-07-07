@@ -3,7 +3,7 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="{{ route('admin.dashboard') }}" class="logo logo-dark">
+                <a href="{{ route('dashboard') }}" class="logo logo-dark">
                     <span class="logo-sm">
                         <img src="{{ asset('storage/' . DiligentCreators('site_logo_small')) }}"
                             alt="{{ DiligentCreators('site_name') }}" height="22">
@@ -14,7 +14,7 @@
                     </span>
                 </a>
 
-                <a href="{{ route('admin.dashboard') }}" class="logo logo-light">
+                <a href="{{ route('dashboard') }}" class="logo logo-light">
                     <span class="logo-sm">
                         <img src="{{ asset('storage/' . DiligentCreators('site_logo_small')) }}"
                             alt="{{ DiligentCreators('site_name') }}" height="22">

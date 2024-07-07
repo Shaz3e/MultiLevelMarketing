@@ -23,6 +23,7 @@ class User extends Authenticatable implements Auditable
      */
     protected $fillable = [
         'referral_code',
+        'cpid',
         'referrer_id',
         'company_id',
         'name',
@@ -125,6 +126,9 @@ class User extends Authenticatable implements Auditable
 
         static::creating(function ($user) {
             $user->referral_code = strtoupper(Str::random(10));
+            // Generate cpid 10 only digits random and unique code
+            $cpid = str_pad(random_int(0, 9999999999), 10, '0', STR_PAD_LEFT);
+            $user->cpid = $cpid;
         });
 
         static::created(function ($user) {

@@ -25,7 +25,7 @@ class CurrencySettingController extends Controller
 
         $rules = [
             'currency_id' => 'required|exists:currencies,id',
-            'gst' => 'required|gte:0|lte:100',
+            'sst' => 'required|gte:0|lte:100',
             'default_price' => 'required|gte:0|lte:100000000',
         ];
 

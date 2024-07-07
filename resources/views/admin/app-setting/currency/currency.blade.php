@@ -25,11 +25,11 @@
                 {{-- /.col --}}
                 <div class="col-4">
                     <div class="form-group">
-                        <label for="gst">GST %</label>
-                        <input type="number" name="gst" id="gst" class="form-control" min="0" max="100"
-                            value="{{ old('gst', DiligentCreators('gst')) }}" required>
+                        <label for="sst">SST %</label>
+                        <input type="number" name="sst" id="sst" class="form-control" min="0" max="100"
+                            value="{{ old('sst', DiligentCreators('sst')) }}" required>
                     </div>
-                    @error('gst')
+                    @error('sst')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             
+            $table->string('cpid')->unique()->nullable(); // customer personal id should be 9 digit numeric code
             $table->string('referral_code')->unique()->nullable();
             $table->unsignedBigInteger('referrer_id')->nullable();
             $table->foreign('referrer_id')->references('id')->on('users')->onDelete('set null');
