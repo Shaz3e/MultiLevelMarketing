@@ -14,13 +14,12 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
+        $user = Auth::user(); // Get the logged-in user
+
         $promotions = Promotion::where('is_active', 1)
             ->orderBy('is_featured', 'desc')
             ->orderBy('created_at', 'desc')
             ->get();
-
-        $user = Auth::user(); // Get the logged-in user
-
         
         $referralTree = User::with('referrals.referrals.referrals')->findOrFail($user->id);
 

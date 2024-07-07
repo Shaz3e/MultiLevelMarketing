@@ -41,8 +41,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Company</th>
+                                <th>Contact Details</th>
                                 @if (!$showDeleted)
                                     <th>Status</th>
                                 @endif
@@ -53,14 +52,16 @@
                             @foreach ($users as $user)
                                 <tr wire:key="{{ $user->id }}">
                                     <td>{{ $user->id }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
                                     <td>
-                                        @if ($user->company != null)
-                                            <a href="{{ route('admin.companies.show', $user->company->id) }}">
-                                                {{ $user->company->name }}
-                                            </a>
-                                        @endif
+                                        <strong>{{ $user->name }}</strong>
+                                        <br>
+                                        <span class="badge bg-primary">CPID: {{ $user->cpid }}</span>
+                                        <br>
+                                        <span class="badge bg-success">Referral Code: {{ $user->referral_code }}</span>
+                                    </td>
+                                    <td>
+                                        {{ $user->email }}
+                                        {{ $user->phone }}
                                     </td>
                                     @if (!$showDeleted)
                                         <td>

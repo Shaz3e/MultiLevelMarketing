@@ -44,7 +44,7 @@ class ReferralService
 
         // Update user's wallet
         $wallet = UserWallet::firstOrCreate(['user_id' => $user->id]);
-        $wallet->increment('amount', $rewardAmount);
+        $wallet->increment('reward_amount', $rewardAmount);
         $wallet->increment('points', $points);
     }
 }

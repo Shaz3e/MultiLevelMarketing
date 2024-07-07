@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\KnowledgebaseArticle;
 use App\Models\User;
+use App\Models\UserPayoutWallet;
 use Database\Factories\KnowledgebaseArticleFactory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -34,6 +35,9 @@ class DatabaseSeeder extends Seeder
             // CompanySeeder::class,
             // DepartmentSeeder::class,
             UserSeeder::class,
+            UserKycSeeder::class,
+            UserPayoutWalletSeeder::class,
+            UserWalletSeeder::class,
             // KnowledgebaseCategorySeeder::class,
             RankingSeeder::class,
             CurrencySeeder::class,

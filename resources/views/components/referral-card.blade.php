@@ -9,7 +9,7 @@
         <p class="my-2 text-center">
             {{ $direct->name }}
             <br>
-            <span class="badge bg-primary">User ID: {{ $direct->id }}</span>
+            <span class="badge bg-primary">User ID: {{ $direct->cpid }}</span>
             <br>
             <span class="badge bg-success">Ref Code: {{ $direct->referral_code }}</span>
             @if ($direct->wallet)

@@ -12,7 +12,8 @@ class UserWallet extends Model
 
     protected $fillable = [
         'user_id',
-        'amount',
+        'e_money_wallet',
+        'reward_amount',
         'points',
     ];
 

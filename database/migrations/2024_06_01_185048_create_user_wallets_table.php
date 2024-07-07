@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->decimal('amount', 8, 2)->default(0.00);
+            $table->decimal('e_money_wallet',10,2)->default(0.00);
+            $table->decimal('reward_amount', 8, 2)->default(0.00);
             $table->decimal('points', 8,0)->default(0);
             $table->softDeletes();
             $table->timestamps();

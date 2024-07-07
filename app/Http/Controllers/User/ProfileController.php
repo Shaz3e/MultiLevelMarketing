@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\UserPayoutWallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ProfileController extends Controller
 {
@@ -197,37 +198,55 @@ class ProfileController extends Controller
      */
     public function updateKyc(Request $request)
     {
-        // Validated
-        $validated = $request->validate([
-            'id_number' => 'required|numeric|max_digits:50',
-            'id_proof_front' => 'required|mimes:jpeg,png|max:2048',
-            'id_proof_back' => 'required|mimes:jpeg,png|max:2048',
-            'address_proof' => 'required|mimes:jpeg,png|max:2048',
+        // Validate the basic fields
+        $validatedData = $request->validate([
+            'id_type' => 'required|string|max:150',
+            'address_proof_type' => 'required|string|max:150',
+            'id_number' => 'required|numeric|max:999999999999999',
+            'id_proof_front' => 'required|mimes:jpeg,png,pdf,doc,docx|max:5120',
+            'id_proof_back' => 'nullable|mimes:jpeg,png,pdf,doc,docx|max:5120',
+            'address_proof' => 'required|mimes:jpeg,png,pdf,doc,docx|max:5120',
         ]);
 
-        // Get current user
+        // Get the current authenticated user
         $user = Auth::user();
 
-        // Upload ID Proof Front
-        $id_proof_front = time() . '-id-proof-front' . $request->file('id_proof_front')->extension();
-        $validated['id_proof_front'] = $request->file('id_proof_front')
-            ->storeAs('user-kyc', $id_proof_front, 'public');
+        try {
+            // Handle the file uploads and store the file paths
+            if ($request->hasFile('id_proof_front')) {
+                $idProofFrontFile = $request->file('id_proof_front');
+                $idProofFrontName = time() . '-id-proof-front.' . $idProofFrontFile->extension();
+                $validatedData['id_proof_front'] = $idProofFrontFile->storeAs('user-kyc', $idProofFrontName, 'public');
+            }
 
-        // Upload ID Proof Back
-        $id_proof_back = time() . '-id-proof-back' . $request->file('id_proof_back')->extension();
-        $validated['id_proof_back'] = $request->file('id_proof_back')
-            ->storeAs('user-kyc', $id_proof_back, 'public');
+            if ($request->hasFile('id_proof_back')) {
+                $idProofBackFile = $request->file('id_proof_back');
+                $idProofBackName = time() . '-id-proof-back.' . $idProofBackFile->extension();
+                $validatedData['id_proof_back'] = $idProofBackFile->storeAs('user-kyc', $idProofBackName, 'public');
+            }
 
-        // Upload Address Proof
-        $address_proof = time() . '-address-proof' . $request->file('address_proof')->extension();
-        $validated['address_proof'] = $request->file('address_proof')
-            ->storeAs('user-kyc', $address_proof, 'public');
+            if ($request->hasFile('address_proof')) {
+                $addressProofFile = $request->file('address_proof');
+                $addressProofName = time() . '-address-proof.' . $addressProofFile->extension();
+                $validatedData['address_proof'] = $addressProofFile->storeAs('user-kyc', $addressProofName, 'public');
+            }
 
-        // Update KYC
-        $user->userKyc->update($validated);
+            // Update or create the KYC record
+            if ($user->userKyc) {
+                $user->userKyc->update($validatedData);
+            } else {
+                $user->userKyc()->create($validatedData);
+            }
 
-        session()->flash('success', 'KYC updated successfully!');
+            // Set success message
+            session()->flash('success', 'KYC updated successfully!');
+        } catch (\Exception $e) {
+            // Log the error and set an error message
+            // Log::error('Error updating KYC: ' . $e->getMessage());
+            session()->flash('error', 'There was an error updating your KYC. Please try again.');
+        }
 
+        // Redirect back to the previous page
         return back();
     }
 

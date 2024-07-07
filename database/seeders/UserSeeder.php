@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
                 'email' => 'user1@email.com',
                 'password' => Hash::make('password'),
                 'is_active' => 1,
+                'cpid' => 123456789,
                 'referral_code' => strtoupper(Str::random(10)),
                 'created_at' => now(),
                 'updated_at' => now(),
