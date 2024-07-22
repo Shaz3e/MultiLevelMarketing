@@ -15,13 +15,22 @@ class RegisterController extends Controller
 {
     public function view(Request $request)
     {
-        return view('user.auth.register');
+        // Access the qr query parameter
+        $qr = $request->query('qr');
+
+        return view('user.auth.register',[
+            'qr' => $qr
+        ]);
     }
 
     public function post(RegisterRequest $request)
     {
+
         // Validate Request
         $validated = $request->validated();
+        
+        // Get the qr_code from the request
+        $qr_code = $request->input('qr');
 
         $referrer = User::where('referral_code', $validated['referral_code'])->first();
         $pin_code = PinCode::where([
@@ -41,6 +50,7 @@ class RegisterController extends Controller
         $user->remember_token = bin2hex(random_bytes(32));
         $user->password = Hash::make($validated['password']);
         $user->referrer_id = $referrer ? $referrer->id : null;
+        $user->qr_code = $qr_code; // Assuming you have a column named qr_code in your users table
         $user->save();
 
         if ($referrer) {

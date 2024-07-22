@@ -56,6 +56,7 @@
 
                 <form action="{{ route('register.store') }}" method="POST" class="needs-validation" novalidate>
                     @csrf
+                    <input type="hidden" name="qr" value="{{ old('qr', request('qr')) }}">
                     <div class="row mx-5">
 
                         <div class="col-12 mb-2">

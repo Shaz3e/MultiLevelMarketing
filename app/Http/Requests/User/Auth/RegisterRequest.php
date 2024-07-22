@@ -35,6 +35,10 @@ class RegisterRequest extends BaseFormRequest
                 'required',
                 'same:password',
             ],
+            'qr_code' => [
+                'nullable',
+                'string',
+            ],
             'referral_code' => [
                 'required',
                 'string',
