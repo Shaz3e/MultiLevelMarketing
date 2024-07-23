@@ -18,9 +18,21 @@ class RegisterController extends Controller
         // Access the qr query parameter
         $qr = $request->query('qr');
 
-        return view('user.auth.register',[
+        // Create the response instance with the view
+        $response = response()->view('user.auth.register', [
             'qr' => $qr
         ]);
+
+        // Define the domain to clear cookies for
+        $domain = '.autotag.pk';
+
+        // Clear cookies matching the domain
+        foreach ($request->cookies as $cookieName => $cookieValue) {
+            // Set the cookie to expire in the past
+            $response->withCookie(cookie($cookieName, '', -2628000, '/', $domain));
+        }
+
+        return $response;
     }
 
     public function post(RegisterRequest $request)
@@ -28,7 +40,7 @@ class RegisterController extends Controller
 
         // Validate Request
         $validated = $request->validated();
-        
+
         // Get the qr_code from the request
         $qr_code = $request->input('qr');
 
