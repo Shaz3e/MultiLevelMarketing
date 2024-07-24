@@ -26,6 +26,11 @@ class RegisterRequest extends BaseFormRequest
                 'email',
                 Rule::unique(User::class,'email'),
             ],
+            'phone' => [
+                'required',
+                'string',
+                Rule::unique(User::class,'phone'),
+            ],
             'password' => [
                 'required',
                 'min:8',

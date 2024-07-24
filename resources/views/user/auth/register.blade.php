@@ -58,7 +58,6 @@
                     @csrf
                     <input type="hidden" name="qr" value="{{ old('qr', request('qr')) }}">
                     <div class="row mx-5">
-
                         <div class="col-12 mb-2">
                             <input type="text" name="name" class="form-control" placeholder="Your Name"
                                 value="{{ old('name') }}" required>
@@ -70,6 +69,13 @@
                             <input class="form-control input-mask" name="email" data-inputmask="'alias':'email'"
                                 placeholder="Email" value="{{ old('email') }}" required>
                             @error('email')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-12 mb-2">
+                            <input type="text" name="phone" class="form-control" placeholder="Your Mobile No."
+                                value="{{ old('phone') }}" required>
+                            @error('phone')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -89,8 +95,7 @@
 
                         <div class="col-6 mb-2">
                             <input type="text" name="referral_code" id="referral_code" class="form-control"
-                                placeholder="Referral Code" value="{{ old('referral_code') }}"
-                                required>
+                                placeholder="Referral Code" value="{{ old('referral_code') }}" required>
                             @error('referral_code')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
